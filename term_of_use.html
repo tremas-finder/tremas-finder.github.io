@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TremasFinder - 利用規約</title>
+    <!-- 基本的なファビコン設定 -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" sizes="any">
+    
+    <!-- Apple Touch Icon (iOS) -->
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    
+    <!-- Safari Pinned Tab Icon -->
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#ff7842">
+    
+    <!-- Windows Tiles -->
+    <meta name="msapplication-TileColor" content="#ff7842">
+    <meta name="msapplication-TileImage" content="images/mstile-144x144.png">
+    
+    <!-- SVGファビコン (最新のブラウザ向け) -->
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    
+    <!-- マニフェストファイル (PWA向け) -->
+    <link rel="manifest" href="images/site.webmanifest">
+    
+    <!-- テーマカラー -->
+    <meta name="theme-color" content="#ff7842">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --main-color: #ff7842;
+            --sub-color-1: #ffa042;
+            --sub-color-2: #fdfc0e;
+            --sub-color-3: #441100;
+            --accent-color: #00a268;
+            --bg-light: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* ヘッダー */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            position: relative;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        /* ナビゲーションメニュー */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--sub-color-3);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:not(.btn):after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--main-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:not(.btn):hover {
+            color: var(--main-color);
+        }
+        
+        .nav-links a:not(.btn):hover:after {
+            width: 100%;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: var(--main-color);
+            color: var(--text-light);
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--sub-color-1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* モバイルメニューボタン */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--main-color);
+            cursor: pointer;
+        }
+
+        /* モバイルメニュー */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            z-index: 999;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateY(0);
+            display: block;
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .mobile-nav-links li {
+            margin: 15px 0;
+        }
+        
+        .mobile-nav-links a {
+            color: var(--sub-color-3);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: block;
+            padding: 8px 0;
+        }
+        
+        .mobile-nav-links a:hover {
+            color: var(--main-color);
+        }
+        
+        .btn-mobile {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--main-color);
+            color: var(--text-light) !important;
+            border-radius: 50px;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* メインコンテンツ */
+        .terms-content {
+            padding: 120px 0 80px;
+            background-color: white;
+            min-height: calc(100vh - 250px);
+        }
+
+        .terms-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .terms-title {
+            color: var(--main-color);
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .terms-section {
+            margin-bottom: 40px;
+        }
+
+        .terms-section-title {
+            color: var(--sub-color-3);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .terms-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .terms-section ul, .terms-section ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        .terms-section li {
+            margin-bottom: 10px;
+        }
+
+        .terms-section a {
+            color: var(--main-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .terms-section a:hover {
+            text-decoration: underline;
+        }
+
+        .terms-updated {
+            text-align: right;
+            margin-top: 50px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* フッター */
+        .footer {
+            background-color: var(--sub-color-3);
+            color: var(--text-light);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--sub-color-2);
+        }
+
+        .footer-list {
+            list-style: none;
+        }
+
+        .footer-list li {
+            margin-bottom: 10px;
+        }
+
+        .footer-list a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-list a:hover {
+            color: var(--sub-color-2);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--main-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .terms-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+            
+            .terms-section-title {
+                font-size: 1.3rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .footer-logo, 
+            .footer-links {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .footer-text {
+                max-width: none;
+                margin: 0 auto 20px;
+            }
+            
+            .footer-title {
+                text-align: center;
+            }
+            
+            .footer-list {
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.svg" alt="TremasFinder Logo">
+                </a>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html#features">特徴</a></li>
+                    <li><a href="index.html#workflow">利用の流れ</a></li>
+                    <li><a href="index.html#pricing">料金プラン</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" class="btn">ユーザー登録</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    
+    <!-- モバイルメニュー -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html#features">特徴</a></li>
+            <li><a href="index.html#workflow">利用の流れ</a></li>
+            <li><a href="index.html#pricing">料金プラン</a></li>
+            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" class="btn-mobile">ユーザー登録</a></li>
+        </ul>
+    </div>
+
+    <!-- 利用規約コンテンツ -->
+    <main class="terms-content">
+        <div class="terms-container">
+            <h1 class="terms-title">TremasFinder 利用規約</h1>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">1. はじめに</h2>
+                <p>本利用規約（以下「本規約」といいます）は、TremasFinder（以下「当社」といいます）が提供するサービス「TremasFinder」（以下「本サービス」といいます）の利用条件を定めるものです。ユーザーの皆様（以下「ユーザー」といいます）には、本規約に同意いただいた上で、本サービスをご利用いただきます。</p>
+                <p>本サービスをご利用いただくことにより、ユーザーは本規約の全ての条項に同意したものとみなされます。本規約に同意いただけない場合は、本サービスをご利用いただくことはできません。</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">2. サービス内容</h2>
+                <p>本サービスは、物販仕入れの効率化を支援するオンラインツールです。具体的には、以下の機能を提供します：</p>
+                <ul>
+                    <li>自然言語による商品検索支援</li>
+                    <li>CSVデータの分析と可視化</li>
+                    <li>商品の利益性、需要、競合状況の分析</li>
+                    <li>仕入れ判断のためのデータ提供</li>
+                </ul>
+                <p>当社は、ユーザーに事前に通知することなく、本サービスの内容を変更、追加、中断、または終了する権利を有します。</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">3. アカウント登録と管理</h2>
+                <p>本サービスの一部機能をご利用いただくためには、アカウント登録が必要です。アカウント登録の際には、正確かつ最新の情報を提供していただく必要があります。</p>
+                <p>ユーザーは、自己のアカウント情報、パスワードを適切に管理する責任を負います。アカウント情報、パスワードが第三者に漏洩した場合、またはそれらが第三者に不正に利用されている疑いがある場合は、直ちに当社にご連絡ください。</p>
+                <p>当社は、ユーザーのアカウント情報、パスワードの管理不備、使用上の過誤、第三者の使用等によって生じた損害について、一切の責任を負いません。</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">4. 利用料金</h2>
+                <p>本サービスの利用料金は、当社ウェブサイトの料金プランページに記載されている通りです。当社は、利用料金を随時変更する権利を有しますが、変更の際には事前に通知いたします。</p>
+                <p>ユーザーは、選択したプランに応じた利用料金を、当社が指定する方法で支払うものとします。支払いが確認できない場合、当社は本サービスの提供を中断または終了する場合があります。</p>
+                <p>無料プランは一部機能に制限がありますが、基本的な機能をご利用いただけます。有料プランへのアップグレードは任意です。</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">5. 禁止事項</h2>
+                <p>ユーザーは、本サービスの利用にあたり、以下の行為を行ってはなりません：</p>
+                <ol>
+                    <li>法令または公序良俗に違反する行為</li>
+                    <li>犯罪的行為に関連する行為</li>
+                    <li>当社のサーバーやネットワークの機能を破壊したり、妨害したりする行為</li>
+                    <li>本サービスの運営を妨害する行為</li>
+                    <li>他のユーザーのアカウントを不正に使用する行為</li>
+                    <li>他のユーザーまたは第三者に不利益、損害を与える行為</li>
+                    <li>他のユーザーまたは第三者の知的財産権、肖像権、プライバシー権その他の権利を侵害する行為</li>
+                    <li>本サービスを通じて入手した情報を商業的に利用する行為（当社が許可した場合を除く）</li>
+                    <li>当社が許可していない本サービス上での宣伝、広告、勧誘、または営業行為</li>
+                    <li>反社会的勢力に対する利益供与その他の協力行為</li>
+                    <li>その他、当社が不適切と判断する行為</li>
+                </ol>
+            </div>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">6. 知的財産権</h2>
+                <p>本サービスに関連するコンテンツ、ソフトウェア、デザイン、ロゴ、商標等の知的財産権は、当社または当社にライセンスを許諾している第三者に帰属します。ユーザーは、当社の書面による事前の承諾なく、これらの知的財産を複製、改変、配布、または商業的に利用することはできません。</p>
+                <p>ユーザーが本サービスを通じて投稿したコンテンツの知的財産権は、ユーザー自身に帰属します。ただし、ユーザーは当社に対し、本サービスの提供・改善・宣伝等を目的として、当該コンテンツを無償で利用（複製、改変、公開等）する権利を許諾するものとします。</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">7. 免責事項</h2>
+                <p>当社は、本サービスの内容の正確性、完全性、有用性、または特定の目的への適合性について、いかなる保証も行いません。</p>
+                <p>当社は、本サービスの利用によってユーザーが得る情報の正確性や有用性を保証するものではありません。ユーザーは、自己の責任において本サービスを利用するものとします。</p>
+                <p>当社は、本サービスの利用によってユーザーに生じたいかなる損害（直接損害、間接損害、付随的損害、特別損害、逸失利益等を含みますが、これらに限られません）についても、一切の責任を負いません。</p>
+                <p>当社は、本サービスの停止、中断、終了、利用不能または変更、ユーザーのデータの消失または機器の故障もしくは損傷、その他本サービスに関連してユーザーが被った損害について、一切の責任を負いません。</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">8. サービスの変更・中断・終了</h2>
+                <p>当社は、以下の場合に、ユーザーに事前に通知することなく、本サービスの全部または一部の提供を変更、中断、または終了することができます：</p>
+                <ul>
+                    <li>本サービスのシステムの保守、点検、修理、更新等を行う場合</li>
+                    <li>火災、停電、天災等の不可抗力により本サービスの提供が困難になった場合</li>
+                    <li>戦争、暴動、労働争議等により本サービスの提供が困難になった場合</li>
+                    <li>本サービスのシステムに負荷が集中した場合、またはセキュリティ上の問題が発生した場合</li>
+                    <li>その他、当社が本サービスの提供が困難と判断した場合</li>
+                </ul>
+                <p>当社は、上記の変更、中断、または終了によってユーザーに生じた損害について、一切の責任を負いません。</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">9. プライバシーポリシー</h2>
+                <p>当社のプライバシーポリシーは、本規約の一部を構成します。ユーザーは、本サービスを利用することにより、当社のプライバシーポリシーにも同意したものとみなされます。</p>
+                <p>当社のプライバシーポリシーについては、<a href="privacy-policy.html">プライバシーポリシー</a>をご参照ください。</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">10. 規約の変更</h2>
+                <p>当社は、必要と判断した場合には、ユーザーに通知することなく本規約を変更することができるものとします。変更後の規約は、当社ウェブサイト上に表示した時点から効力を生じるものとします。</p>
+                <p>本規約の変更後に本サービスを継続して利用する場合、ユーザーは変更後の規約に同意したものとみなされます。</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">11. 連絡・通知</h2>
+                <p>本サービスに関する問い合わせや通知は、当社ウェブサイト上の問い合わせフォームまたは当社が指定する方法で行うものとします。</p>
+                <p>当社からユーザーへの通知は、本サービス上の通知機能、登録されたメールアドレスへのメール送信、またはウェブサイト上での告知により行います。</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2 class="terms-section-title">12. 準拠法・管轄裁判所</h2>
+                <p>本規約の解釈にあたっては、日本法を準拠法とします。</p>
+                <p>本サービスに関連して生じた紛争については、東京地方裁判所を第一審の専属的合意管轄裁判所とします。</p>
+            </div>
+            
+            <div class="terms-updated">
+                <p>最終更新日：2025年6月10日</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo-white.svg" alt="TremasFinder Logo">
+                    <p class="footer-text">TremasFinderは物販に関するあなたのビジネスの立ち上げ、成長をサポートします。</p>
+                    <div class="social-links">
+                        <a href="https://x.com/tremas_finder" aria-label="X" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title">クイックリンク</h3>
+                    <ul class="footer-list">
+                        <li><a href="index.html#features">特徴</a></li>
+                        <li><a href="index.html#workflow">利用の流れ</a></li>
+                        <li><a href="index.html#pricing">料金プラン</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title">サポート</h3>
+                    <ul class="footer-list">
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfYPOiL38QSzJKuSpWiE_sAcPImattnHHUa_VkdZtL70Vdpqw/viewform?usp=header" target="_blank">お問い合わせ</a></li>
+                        <li><a href="privacy-policy.html">プライバシーポリシー</a></li>
+                        <li><a href="terms-of-service.html">利用規約</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 TremasFinder. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // モバイルメニューの表示・非表示
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+            });
+            
+            // スムーズスクロール
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        
+                        const targetId = this.getAttribute('href');
+                        if (targetId !== '#') {
+                            const targetElement = document.querySelector(targetId);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({
+                                    behavior: 'smooth'
+                                });
+                                
+                                // モバイルメニューが開いていたら閉じる
+                                mobileMenu.classList.remove('active');
+                            }
+                        }
+                    }
+                });
+            });
+            
+            // スクロール時のヘッダーの変化
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                } else {
+                    header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
