@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プライバシーポリシー | TremasFinder - 物販仕入の効率化ツール</title>
+    <!-- 基本的なファビコン設定 -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- 基本的なファビコン -->
+    <link rel="icon" href="images/favicon.ico" sizes="any">
+    
+    <!-- Apple Touch Icon (iOS) -->
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    
+    <!-- Safari Pinned Tab Icon -->
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#ff7842">
+    
+    <!-- Windows Tiles -->
+    <meta name="msapplication-TileColor" content="#ff7842">
+    <meta name="msapplication-TileImage" content="images/mstile-144x144.png">
+    
+    <!-- SVGファビコン (最新のブラウザ向け) -->
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    
+    <!-- マニフェストファイル (PWA向け) -->
+    <link rel="manifest" href="images/site.webmanifest">
+    
+    <!-- テーマカラー -->
+    <meta name="theme-color" content="#ff7842">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --main-color: #ff7842;
+            --sub-color-1: #ffa042;
+            --sub-color-2: #fdfc0e;
+            --sub-color-3: #441100;
+            --accent-color: #00a268;
+            --bg-light: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* ヘッダー */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: 60px; /* 70pxから60pxに縮小 */
+            display: flex;
+            align-items: center;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            position: relative;
+            top: 5px; /* 13pxから5pxに変更して上方向に調整 */
+            margin-bottom: 5px; /* 10pxから5pxに縮小 */
+        }
+
+        .logo img {
+            height: 40px; /* 60pxから40pxに縮小 */
+        }
+
+        /* ナビゲーションメニュースタイル */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--sub-color-3);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:not(.btn):after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 5px;
+            left: 0;
+            background-color: var(--main-color);
+            transition: width 0.3s ease;
+        }
+
+        /* ボタン */
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: var(--main-color);
+            color: var(--text-light);
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--sub-color-1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* プライバシーポリシーのメインコンテンツ */
+        .privacy-content {
+            padding-top: 120px; /* ヘッダーの高さ + 余白 */
+            padding-bottom: 60px;
+        }
+
+        .privacy-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--main-color);
+            text-align: center;
+        }
+
+        .privacy-section {
+            margin-bottom: 40px;
+        }
+
+        .privacy-section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--sub-color-3);
+            border-bottom: 2px solid var(--main-color);
+            padding-bottom: 10px;
+        }
+
+        .privacy-section p {
+            margin-bottom: 15px;
+        }
+
+        .privacy-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .privacy-section li {
+            margin-bottom: 10px;
+        }
+
+        .privacy-date {
+            margin-top: 40px;
+            text-align: right;
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        .privacy-contact {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--bg-light);
+            border-radius: 10px;
+        }
+
+        .privacy-contact-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--sub-color-3);
+        }
+
+        /* フッター */
+        .footer {
+            background-color: var(--sub-color-3);
+            color: var(--text-light);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            gap: 40px;
+        }
+
+        .footer-logo {
+            flex: 1;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+
+        .footer-links {
+            flex: 1;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--sub-color-2);
+        }
+
+        .footer-list {
+            list-style: none;
+        }
+
+        .footer-list li {
+            list-style-type: none;
+            margin-bottom: 10px;
+        }
+
+        .footer-list a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-list a:hover {
+            color: var(--sub-color-2);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--main-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+        }
+
+        /* モバイル対応 */
+        @media (max-width: 768px) {
+            /* ナビゲーションメニューを非表示 */
+            .nav-menu {
+                display: none;
+            }
+            
+            /* ヘッダーのスタイル調整 */
+            .header .container {
+                justify-content: center;
+            }
+            
+            /* ロゴのスタイル調整 */
+            .logo {
+                margin: 0 auto;
+                padding: 5px 0;
+            }
+            
+            /* プライバシーポリシーのメインコンテンツ */
+            .privacy-content {
+                padding-top: 100px;
+            }
+            
+            .privacy-title {
+                font-size: 1.8rem;
+            }
+            
+            .privacy-section-title {
+                font-size: 1.3rem;
+            }
+            
+            /* フッターを縦に並べる */
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+                margin-bottom: 30px;
+            }
+            
+            .footer-logo, 
+            .footer-links {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .footer-text {
+                max-width: none;
+                margin: 0 auto 20px;
+            }
+            
+            .footer-title {
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            
+            .footer-list {
+                text-align: center;
+            }
+            
+            .footer-list li {
+                margin-bottom: 8px;
+            }
+            
+            .social-links {
+                justify-content: center;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.svg" alt="TremasFinder Logo">
+                </a>
+            </div>
+            <nav class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html#features">特徴</a></li>
+                    <li><a href="index.html#workflow">利用の流れ</a></li>
+                    <li><a href="index.html#pricing">料金プラン</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" class="btn">ユーザー登録</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- プライバシーポリシーのメインコンテンツ -->
+    <main class="privacy-content">
+        <div class="container">
+            <h1 class="privacy-title">プライバシーポリシー</h1>
+            
+            <div class="privacy-section">
+                <p>TremasFinder（以下、「当サービス」）は、ユーザーのプライバシーを尊重し、個人情報の保護に努めています。本プライバシーポリシーでは、当サービスが収集する情報とその利用方法について説明します。当サービスをご利用いただくことにより、本プライバシーポリシーに同意いただいたものとみなします。</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">1. 収集する情報</h2>
+                <p>当サービスでは、以下の情報を収集することがあります：</p>
+                <ul>
+                    <li><strong>アカウント情報：</strong>ユーザー登録時に、お名前、メールアドレス、パスワードなどの情報をお伺いします。</li>
+                    <li><strong>プロフィール情報：</strong>ユーザーが任意で提供するプロフィール情報（会社名、住所、電話番号など）。</li>
+                    <li><strong>利用データ：</strong>当サービスの利用状況、アクセスログ、IPアドレス、ブラウザ情報、デバイス情報など。</li>
+                    <li><strong>商品データ：</strong>ユーザーがアップロードしたCSVファイルや、Keepaを通じて取得した商品情報。</li>
+                    <li><strong>決済情報：</strong>有料プランをご利用の場合、決済に必要な情報（クレジットカード情報など）。ただし、決済情報は決済代行会社を通じて処理され、当サービスではクレジットカード番号の完全な情報は保持しません。</li>
+                </ul>
+            </div>
+            
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">2. 情報の利用目的</h2>
+                <p>収集した情報は、以下の目的で利用します：</p>
+                <ul>
+                    <li>ユーザーアカウントの作成・管理</li>
+                    <li>当サービスの提供・維持・改善</li>
+                    <li>ユーザーからのお問い合わせへの対応</li>
+                    <li>利用状況の分析とサービスの改善</li>
+                    <li>新機能や更新情報のお知らせ</li>
+                    <li>不正行為の防止とセキュリティの確保</li>
+                    <li>法律上の義務の履行</li>
+                </ul>
+            </div>
+            
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">3. 情報の共有</h2>
+                <p>当サービスでは、以下の場合を除き、ユーザーの個人情報を第三者と共有することはありません：</p>
+                <ul>
+                    <li><strong>サービス提供のためのパートナー：</strong>当サービスを提供するために必要なパートナー企業（ホスティングサービス、決済代行会社など）。これらのパートナーは、ユーザーの情報を保護するための適切な措置を講じています。</li>
+                    <li><strong>法的要請：</strong>法律、規制、法的手続き、政府の要請などに応じる必要がある場合。</li>
+                    <li><strong>ユーザーの同意：</strong>ユーザーから明示的な同意を得た場合。</li>
+                    <li><strong>事業譲渡：</strong>合併、買収、資産売却などの事業譲渡に伴い、ユーザー情報が譲渡される場合。この場合、影響を受けるユーザーには事前に通知します。</li>
+                </ul>
+            </div>
+            
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">4. データの保存期間</h2>
+                <p>ユーザー情報は、アカウントが有効である限り、または当サービスの提供に必要な期間保持されます。ユーザーがアカウントを削除した場合、当社はユーザーの個人情報を適切な期間内に削除または匿名化します。ただし、法的義務の履行や紛争解決のために必要な場合は、一部の情報を保持することがあります。</p>
+                <p>各プランごとのデータ保存期間は以下の通りです：</p>
+                <ul>
+                    <li><strong>フリープラン：</strong>データは7日間保存されます。</li>
+                    <li><strong>スタンダードプラン：</strong>データは90日間保存されます。</li>
+                    <li><strong>プロフェッショナルプラン：</strong>データは無期限に保存されます。</li>
+                </ul>
+            </div>
+            
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">5. ユーザーの権利</h2>
+                <p>ユーザーには以下の権利があります：</p>
+                <ul>
+                    <li><strong>アクセス権：</strong>当サービスが保有するユーザーの個人情報にアクセスする権利。</li>
+                    <li><strong>訂正権：</strong>不正確または不完全な個人情報の訂正を要求する権利。</li>
+                    <li><strong>削除権：</strong>個人情報の削除を要求する権利（特定の条件による）。</li>
+                    <li><strong>処理制限権：</strong>個人情報の処理を制限するよう要求する権利。</li>
+                    <li><strong>データポータビリティの権利：</strong>提供した個人情報を構造化された形式で受け取り、他のサービスに転送する権利。</li>
+                    <li><strong>異議申立権：</strong>個人情報の処理に異議を申し立てる権利。</li>
+                </ul>
+                <p>これらの権利を行使するには、下記の連絡先までお問い合わせください。</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">6. セキュリティ</h2>
+                <p>当サービスでは、ユーザーの個人情報を不正アクセス、改ざん、漏洩、破壊から保護するために、適切な技術的・組織的措置を講じています。ただし、インターネット上のデータ送信や電子ストレージは100%安全ではないため、絶対的なセキュリティを保証することはできません。</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">7. Cookieの使用</h2>
+                <p>当サービスでは、ユーザー体験の向上やサービスの改善を目的として、Cookieやその他の追跡技術を使用しています。これらの技術により、ユーザーのログイン状態の維持、利用傾向の分析、広告のパーソナライズなどが可能になります。</p>
+                <p>多くのブラウザでは、Cookieを無効化または削除する設定が可能です。ただし、Cookieを無効化すると、当サービスの一部機能が正常に動作しなくなる可能性があります。</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">8. 第三者サービス</h2>
+                <p>当サービスでは、Google Analytics、Keepa APIなどの第三者サービスを利用しています。これらのサービスには独自のプライバシーポリシーがあり、当サービスのプライバシーポリシーとは異なる場合があります。ユーザーは、これらのサービスのプライバシーポリシーを確認することをお勧めします。</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">9. お子様のプライバシー</h2>
+                <p>当サービスは、16歳未満のお子様を対象としていません。16歳未満のお子様から個人情報を収集していることが判明した場合、速やかにその情報を削除します。お子様の個人情報が当サービスに提供されていると思われる場合は、下記の連絡先までご連絡ください。</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">10. プライバシーポリシーの変更</h2>
+                <p>当サービスは、必要に応じて本プライバシーポリシーを更新することがあります。重要な変更がある場合は、当ウェブサイト上での告知、メールでの通知、またはその他の適切な方法でユーザーに通知します。</p>
+                <p>本プライバシーポリシーの最新版は常に当ウェブサイト上で確認できます。定期的に内容をご確認いただくことをお勧めします。</p>
+            </div>
+            
+            <div class="privacy-contact">
+                <h2 class="privacy-contact-title">お問い合わせ</h2>
+                <p>本プライバシーポリシーに関するご質問やご意見、または個人情報に関するお問い合わせは、以下のフォームよりご連絡ください：</p>
+                <p>お問い合わせフォーム：<a href="https://docs.google.com/forms/d/e/1FAIpQLSfYPOiL38QSzJKuSpWiE_sAcPImattnHHUa_VkdZtL70Vdpqw/viewform?usp=header" target="_blank">こちら</a></p>
+            </div>
+            
+            <div class="privacy-date">
+                <p>最終更新日：2025年6月10日</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo-white.svg" alt="TremasFinder Logo">
+                    <p class="footer-text">TremasFinderは物販に関するあなたのビジネスの立ち上げ、成長をサポートします。</p>
+                    <div class="social-links">
+                        <a href="https://x.com/tremas_finder" aria-label="X" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title">クイックリンク</h3>
+                    <ul class="footer-list">
+                        <li><a href="index.html#features">特徴</a></li>
+                        <li><a href="index.html#workflow">利用の流れ</a></li>
+                        <li><a href="index.html#pricing">料金プラン</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title">サポート</h3>
+                    <ul class="footer-list">
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfYPOiL38QSzJKuSpWiE_sAcPImattnHHUa_VkdZtL70Vdpqw/viewform?usp=header" target="_blank">お問い合わせ</a></li>
+                        <li><a href="privacy-policy.html">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 TremasFinder. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
