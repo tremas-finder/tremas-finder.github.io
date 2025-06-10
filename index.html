@@ -1,34 +1,3196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Under Construction</title>
-  <style>
-    body {
-      background-color: #fdf6e3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-size: 3em;
-      color: #b58900;
-    }
-  </style>
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FK4FTEVDDY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TremasFinder - 物販仕入の効率化ツール</title>
+    <!-- 基本的なファビコン設定 -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- 基本的なファビコン -->
+    <link rel="icon" href="images/favicon.ico" sizes="any">
+    
+    <!-- Apple Touch Icon (iOS) -->
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    
+    <!-- Safari Pinned Tab Icon -->
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#ff7842">
+    
+    <!-- Windows Tiles -->
+    <meta name="msapplication-TileColor" content="#ff7842">
+    <meta name="msapplication-TileImage" content="images/mstile-144x144.png">
+    
+    <!-- SVGファビコン (最新のブラウザ向け) -->
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    
+    <!-- マニフェストファイル (PWA向け) -->
+    <link rel="manifest" href="images/site.webmanifest">
+    
+    <!-- テーマカラー -->
+    <meta name="theme-color" content="#ff7842">
 
-  gtag('config', 'G-FK4FTEVDDY');
-</script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* ナビゲーションメニュースタイル */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--sub-color-3);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:not(.btn):after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 5px;
+            left: 0;
+            background-color: var(--main-color);
+            transition: width 0.3s ease;
+        }
+
+        /* 「特徴」「利用の流れ」「料金プラン」だけを下げる */
+        .nav-links li:not(:last-child) a {
+            position: relative;
+            top: 10px; /* リンクを下に移動 */
+            padding-bottom: 20px; /* クリック領域を確保 */
+        }
+
+        /* ヘッダーの高さは維持しつつ、下部にリンク用の余白を確保 */
+        .header {
+            height: 70px; /* 元の高さを維持 */
+            padding-bottom: 20px; /* 下部に余白を追加 */
+        }
+
+        /* モバイルメニューの位置も調整 */
+        .mobile-menu {
+            top: 90px; /* ヘッダー+パディングの高さに合わせて調整 */
+        }
+
+        /* モバイル版のヘッダー問い合わせボタン */
+        .mobile-contact-btn {
+            display: none; /* デフォルトでは非表示 */
+            position: fixed; /* 固定位置に変更 */
+            bottom: -5px; /* 画面下部から20pxの位置に配置 */
+            right: 20px; /* 画面右側から20pxの位置に配置 */
+            z-index: 100; /* 他の要素より前面に表示 */
+        }
+
+        .btn-mobile-contact {
+            background-color: var(--main-color);
+            color: var(--text-light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-mobile-contact:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        /* メニュー項目をホバーした時のアンダーラインの位置調整 */
+        .nav-links li:not(:last-child) a:not(.btn):after {
+            bottom: 15px; /* アンダーラインの位置も下げる */
+        }
+
+
+
+        
+        .nav-links a:not(.btn):hover {
+            color: var(--main-color);
+        }
+        
+        .nav-links a:not(.btn):hover:after {
+            width: 100%;
+        }
+        
+        .nav-links .btn {
+            color: var(--text-light); /* 文字色を白に */
+            font-weight: bold; /* 太字を維持 */
+            padding: 8px 16px; /* パディングを維持 */
+        }
+        /* ホバー時の文字色も白に保つ */
+        .nav-links .btn:hover {
+            color: var(--text-light); /* ホバー時も文字色を白に維持 */
+        }
+
+        /* モバイルメニュー用のボタンスタイルも同様に設定 */
+        .mobile-nav-links .btn-mobile {
+            color: var(--text-light) !important; /* モバイルメニューのボタン文字色も白に */
+        }
+                
+        /* モバイルメニューボタン */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--main-color);
+            cursor: pointer;
+        }
+        
+        /* モバイルメニュー */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            z-index: 999;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateY(0);
+            display: block;
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .mobile-nav-links li {
+            margin: 15px 0;
+        }
+        
+        .mobile-nav-links a {
+            color: var(--sub-color-3);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: block;
+            padding: 8px 0;
+        }
+        
+        .mobile-nav-links a:hover {
+            color: var(--main-color);
+        }
+        
+        .btn-mobile {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--main-color);
+            color: var(--text-light) !important;
+            border-radius: 50px;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        :root {
+            --main-color: #ff7842;
+            --sub-color-1: #ffa042;
+            --sub-color-2: #fdfc0e;
+            --sub-color-3: #441100;
+            --accent-color: #00a268;
+            --bg-light: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* ヘッダー */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            position: relative;
+            top: 13px; /* ロゴを下に移動 - 必要に応じて値を調整 */
+            margin-bottom: 10px; /* 下部の余白も追加 */
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        /* ボタン */
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: var(--main-color);
+            color: var(--text-light);
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-white {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: var(--text-light);
+            color: var(--sub-color-3);
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-gray {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* ボタンコンテナの追加 - より右下に配置 */
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 50px;
+            justify-content: flex-end; /* 右寄せにする */
+        }
+        
+
+        /* ボタンの見た目 */
+        .btn-white, .btn-gray {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1.1rem;
+            min-width: 160px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+
+        /* モバイル対応 */
+        
+        /* モバイル表示時のヘッダーメニュー設定 */
+        @media (max-width: 768px) {
+            /* ナビゲーションメニューを完全に非表示 */
+            .nav-menu {
+                display: none !important;
+            }
+            
+            /* ハンバーガーメニューボタンも非表示 */
+            .mobile-menu-btn {
+                display: none !important;
+            }
+            
+            /* モバイルメニュー自体も非表示 */
+            .mobile-menu {
+                display: none !important;
+            }
+            
+            /* ヘッダーのスタイル調整 - ロゴを中央寄せにする */
+            .header .container {
+                justify-content: center;
+            }
+            
+            /* ロゴのスタイル調整 */
+            .logo {
+                margin: 0 auto;
+                padding: 5px 0;
+            }
+            
+            /* ファーストビューの上部余白調整 */
+            .hero {
+                padding-top: 100px; /* ヘッダー分の余白を確保 */
+            }
+        }
+
+        .mobile-layout {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-layout {
+                display: none;
+            }
+            
+            .mobile-layout {
+                display: block;
+                width: 100%;
+            }
+            
+            .mobile-layout .hero-content {
+                max-width: 100%;
+                text-align: center;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .mobile-layout .hero-title-svg {
+                width: 90%;
+                max-width: 400px;
+                margin: 0 auto;
+                display: block;
+            }
+            
+            .mobile-layout .hero-buttons {
+                margin: 30px auto;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .mobile-layout .hero-buttons .btn-white,
+            .mobile-layout .hero-buttons .btn-gray {
+                width: 80%;
+                max-width: 280px;
+            }
+            
+            .mobile-layout .hero-image {
+                max-width: 85%;
+                margin: 0 auto;
+            }
+            
+            .mobile-layout .hero-image img {
+                max-width: 90%;
+
+            }
+            
+            /* ヒーローセクションの高さと背景調整 */
+            .hero {
+                padding-top: 80px;
+                min-height: auto;
+            }
+            
+            .hero::before {
+                height: 0px; /* 180pxから120pxに縮小 */
+            }
+        }
+
+        /* ヒーローセクションのモバイルレイアウト調整 */
+        @media (max-width: 768px) {
+            /* ヒーローセクション全体のレイアウト */
+            .hero {
+                padding-top: 80px;
+                min-height: auto;
+                overflow: visible;
+            }
+            
+            /* メインカラーの背景 */
+             .hero::before {
+                height: 0px; /* 180pxから120pxに縮小 */
+            }
+            
+            /* コンテナのレイアウト */
+            .hero-content {
+                max-width: 100%;
+                padding-right: 0;
+                margin-bottom: 0;
+                text-align: center;
+                width: 100%;
+                order: 1; /* コンテンツを先に */
+            }
+            
+            /* hero-contentのレイアウト */
+            .hero-content {
+                max-width: 100%;
+                padding-right: 0;
+                margin-bottom: -10px; /* マージンを削除 */
+                text-align: center;
+                width: 100%;
+                order: 1; /* コンテンツを先に */
+            }
+            
+            /* SVG画像のスタイル */
+            .hero-title-svg {
+                width: 90%;
+                max-width: 400px;
+                top: -100px;
+                margin: 0 auto;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 5;
+            }
+            
+            /* hero-titleのモバイル用SVGと通常SVGの切り替え */
+            .hero-title-svg.desktop {
+                display: none;
+            }
+            
+            .hero-title-svg.mobile {
+                display: block;
+            }
+            
+            /* 画像のレイアウト - 2番目に配置 */
+            .hero-image {
+                margin-left: 0; /* 左右中央配置のマージンをリセット */
+                margin-right: auto; /* 右側のマージンを自動に */
+                max-width: 85%; /* 幅は適宜調整 */
+                align-self: flex-start; /* flexbox内で左寄せに */
+                transform: translateX(-5%); /* さらに左に移動（必要に応じて） */
+                position: relative; /* 相対位置指定を追加 */
+            }
+            
+            /* コンテナ内での配置調整 */
+            .hero .container {
+                align-items: flex-start; /* コンテナ内の要素を左寄せに */
+                padding-left: 15px; /* 左パディングを追加 */
+                                
+            }
+            
+            /* 画像自体の配置 */
+            .hero-image img {
+                margin-left: 0; /* 画像自体も左寄せ */
+
+            }
+                    
+            /* ボタンのレイアウト - 3番目に配置（画像の下） */
+           .hero-buttons {
+                margin-top: 30px;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                z-index: 3;
+                order: 2; /* ボタンを2番目に変更 */
+            }
+            
+            /* ボタンのスタイル調整 */
+            .hero-buttons .btn-white,
+            .hero-buttons .btn-gray {
+                width: 80%;
+                max-width: 280px;
+            }
+            
+            /* hero-contentの中の各要素の順序を調整 */
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            /* さらに小さい画面サイズでの調整 */
+            @media (max-width: 480px) {
+                
+                 .hero::before {
+                height: 0px; /* 180pxから120pxに縮小 */
+            }
+                
+                .hero-image {
+                    max-width: 90%; /* 画像をさらに大きく */
+                }
+                
+                .hero-buttons {
+                    margin-top: 20px; /* マージンを少し減らす */
+                }
+                
+                .hero-buttons .btn-white,
+                .hero-buttons .btn-gray {
+                    width: 90%; /* ボタンを広げる */
+                    padding: 10px 15px; /* パディングを調整 */
+                    font-size: 1rem; /* フォントサイズを調整 */
+                }
+            }
+        }
+        @media (max-width: 768px) {
+            /* ヘッダーのコンテナを左寄せに変更 */
+            .header .container {
+                justify-content: space-between; /* 左右に配置 */
+                padding: 0 15px; /* 左右の余白を調整 */
+            }
+            
+            /* ロゴのサイズを小さく、位置を左に調整 */
+            .logo {
+                margin: 0; /* 中央寄せ用のマージンをリセット */
+                text-align: left;
+            }
+
+            /* 問い合わせボタンを表示 */
+            .mobile-contact-btn {
+                display: block;
+                position: relative;
+                right: 10px; /* 右側の位置調整 */
+            }
+            
+            .logo img {
+                height: 40px; /* ロゴの高さを小さく (現在は60px) */
+                width: auto; /* 幅は自動調整 */
+            }
+        }
+        /* さらに小さい画面サイズでの調整 */
+        @media (max-width: 480px) {
+            .logo img {
+                height: 38px; /* ロゴをさらに小さく */
+            }
+            
+            .btn-mobile-contact {
+                width: 34px; /* ボタンをやや小さく */
+                height: 34px;
+                font-size: 1.0rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            /* heroセクション全体の縦幅を大きくする */
+            .hero {
+                padding: 140px 0 60px; /* 下部のパディングを増やして縦幅を拡大 */
+                min-height: 400px; /* 最小高さを設定して縦幅を確保 */
+            }
+            
+            /* コンテナの高さも拡大 */
+            .hero .container {
+                padding-bottom: 100px; /* 下部のパディングを増やして縦幅を拡大 */
+                min-height: 550px; /* 最小高さを設定 */
+                
+            }
+            
+            /* hero-contentを左に配置 */
+            .hero-content {
+                max-width: 520px;
+                padding-right: 20px; /* 右のパディングを減らす */
+                margin-left: -30px; /* 左マージンを負の値にして左に移動 */
+                position: relative;
+                left: -65px; /* さらに左に配置 */
+                z-index: 10;
+            }
+            
+            /* SVGタイトルも調整 */
+            .hero-title-svg {
+                width: 180%;
+                top: 100px; /* 現在の60pxから増やして下に移動 */
+                margin-bottom: 50px; /* 下のマージンも増やして間隔を確保 */
+                position: relative; /* position: relativeを確実に適用 */
+            }
+            
+            /* hero-contentの配置も調整 */
+            .hero-content {
+                padding-top: 130px; /* 上部にパディングを追加 */
+            }
+            
+            /* ボタンの位置も合わせて調整 */
+            .hero-buttons {
+                margin-top: 70px; /* 現在の50pxから増やして下に配置 */
+                position: relative; /* z-indexを有効にするためにposition指定 */
+                z-index: 50; /* 現在のhero-content(10)やhero-image(5)より大きな値 */
+            }
+            
+            /* 画像部分も調整が必要かもしれません */
+            /* 画像部分のスタイル - problems-imageと同様に */
+            .hero-image {
+                flex: 1;
+                text-align: center;
+                position: absolute;
+                right: -150px; /* コンテナのパディングと同じ */
+                bottom: -7px; /* 下部に配置 */
+                max-width: 75%; /* 幅を制限 */
+                z-index: 5
+            }
+        }
+        /* 段階的な調整: 画面サイズによってより細かく調整 */
+        @media (min-width: 770px) and (max-width: 920px) {
+            /* 小さめの中間サイズ向け */
+            .hero-title-svg {
+                width: 110% !important; /* さらに小さく */
+                right: -50px;
+            }
+        }
+
+        @media (min-width: 921px) and (max-width: 1080px) {
+            /* 中間サイズ向け */
+            .hero-title-svg {
+                width: 125% !important;
+                right: -60px;
+            }
+        }
+
+        @media (min-width: 1081px) and (max-width: 1180px) {
+            /* 大きめの中間サイズ向け */
+            .hero-title-svg {
+                width: 150% !important;
+                right: -70px;
+            }
+        }
+
+        .btn:hover {
+            background-color: var(--sub-color-1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .btn-white:hover {
+            background-color: var(--sub-color-2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .btn-gray:hover {
+            background-color: var(--sub-color-2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+        }
+
+        .btn-accent:hover {
+            background-color: #008f5b;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--main-color);
+            color: var(--main-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--main-color);
+            color: var(--text-light);
+        }
+
+        /* セクション共通 */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 60px;
+            color: var(--main-color);
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--sub-color-3);
+        }
+
+        /* ファーストビュー - 画像サイズ調整版 */
+        .hero {
+            position: relative;
+            width: 100%;
+            background-color: var(--main-color);
+            display: flex;
+            align-items: flex-start;
+            padding: 0px 0 0; /* 下部のパディングを削除 */
+            overflow: visible;
+            min-height: 600; /* 最小高さの制限を解除 */
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            right: 0; /* 右寄せに変更 */
+            width: 50%; /* 画面の右半分のみを使用 */
+            height: 100%;
+            display: flex;
+            justify-content: flex-end; /* 右寄せ */
+            align-items: center;
+            z-index: 1;
+        }
+
+        .hero-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* cover に変更してエリアを埋める */
+            object-position: center right; /* 右寄せに配置 */
+            opacity: 0.99;
+        }
+
+        /* 大きな画面サイズ用の画像スタイル - デスクトップ */
+        @media (min-width: 1201px) {
+            .hero-background img.large {
+                display: block;
+            }
+            .hero-background img.medium,
+            .hero-background img.small {
+                display: none;
+            }
+        }
+
+        /* 中サイズの画面用の画像スタイル - タブレット */
+        @media (min-width: 601px) and (max-width: 1200px) {
+            .hero-background img.medium {
+                display: block;
+            }
+            .hero-background img.large,
+            .hero-background img.small {
+                display: none;
+            }
+        }
+
+        /* 小さい画面サイズ用の画像スタイル - モバイル */
+        @media (max-width: 600px) {
+            .hero-background img.small {
+                display: block;
+            }
+            .hero-background img.large,
+            .hero-background img.medium {
+                display: none;
+            }
+        }
+
+        .hero .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+             /* 下部のマージンを追加して背景色の高さを確保 */
+             padding-bottom: 50px; /* ここで画像の下端位置を調整 */
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 520px;
+            padding-right: 40px;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* SVG画像のスタイル */
+        .hero-title-svg {
+            max-width: 750px;
+            height: auto;
+            margin-bottom: 30px;
+            right: -100px;
+            z-index: 20;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+            position: relative; /* 相対位置指定を有効に */
+            top: 60px;
+        }
+
+        
+        .hero-image img {
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 0px;
+            object-fit: contain;
+        }
+
+        /* レスポンシブ対応のSVGサイズ調整 */
+        @media (max-width: 768px) {
+            .hero-title-svg {
+                max-width: 90%;
+            }
+        }
+        @media (max-width: 768px) {
+            .credits {
+                position: static; /* モバイルでは通常のフロー */
+                text-align: center;
+                margin-top: 10px;
+            }
+        }
+
+        /* モバイル版専用のボタンセクション */
+        .mobile-buttons-section {
+            display: none; /* デフォルトでは非表示 */
+            padding: 20px 0;
+            background-color: var(--bg-light);
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* モバイル版のボタンスタイル */
+        .mobile-buttons {
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 0; /* hero-buttonsのマージンをリセット */
+        }
+
+        .mobile-buttons .btn-white,
+        .mobile-buttons .btn-gray {
+            width: 80%;
+            max-width: 280px;
+        }
+
+        /* デスクトップとモバイルの表示切り替え */
+        @media (max-width: 768px) {
+            /* モバイル版ボタンセクションを表示 */
+            .mobile-buttons-section {
+                display: block;
+            }
+            
+            /* モバイルレイアウト内のボタンを非表示 */
+            .mobile-layout .hero-buttons {
+                display: none;
+            }
+            
+            /* hero-imageの位置調整 - ボタンが別セクションになるため */
+            .mobile-layout .hero-image {
+                margin-left: 0px; /* さらに左に配置（負の値でより左へ） */
+                max-width: 150%; /* 画像の幅を大きくして左寄せ効果を強調 */
+                margin-top: 30px; /* 上からの距離を増やして下に配置 */
+                position: relative;
+                top: 57px; /* さらに下に配置 */
+            }
+            
+            /* hero全体の高さ調整（画像が下に移動するため） */
+            .hero {
+                padding-bottom: 0px; /* 下部の余白を増やして全体の高さを確保 */
+            }
+        }
+
+        .desktop-layout .hero-image img {
+            content: url('images/firstchath.jpg'); /* デスクトップ用画像を明示的に指定 */
+        }
+
+        .mobile-layout .hero-image img {
+            content: url('images/firstchath-small.jpg'); /* モバイル用画像を明示的に指定 */
+        }
+
+        /* 画像サイズと配置の調整 */
+        .mobile-layout .hero-image img {
+            max-width: 110%;
+            object-fit: contain;
+        }
+        .problems {
+            display: block; /* デスクトップでは表示 */
+        }
+
+        .mobile-problems {
+            display: none  !important; /* 初期状態では非表示 */
+        }
+
+        /* モバイル対応 - 課題共感セクションを縦に並べる */
+        @media (max-width: 768px) {
+             /* モバイル向けメディアクエリで設定を逆転 */
+        @media (max-width: 768px) {
+            .problems {
+                display: none !important;
+            }
+            
+            .mobile-problems {
+                display: block !important;
+            }
+        }
+        
+
+            .problems .container {
+                flex-direction: column; /* 縦方向に並べる */
+            }
+
+            .problems-content {
+                width: 100%;
+                padding-right: 0; /* 右のパディングを削除 */
+                order: 1; /* コンテンツを先に表示 */
+            }
+
+            .problems-title {
+                font-size: 1.6rem; /* フォントサイズを少し小さく */
+                text-align: center; /* タイトルを中央揃え */
+                margin-bottom: 25px;
+            }
+
+            .problem-item {
+                margin-bottom: 20px; /* 項目間のマージンを少し減らす */
+            }
+
+            .problem-icon {
+                width: 40px; /* アイコンを少し小さく */
+                height: 40px;
+                font-size: 1.3rem;
+            }
+
+            .problem-text h3 {
+                font-size: 1.2rem; /* 見出しを少し小さく */
+            }
+
+            .problem-text p {
+                font-size: 0.95rem; /* テキストを少し小さく */
+            }
+
+            .problems-cta {
+                flex-direction: column; /* ボタンを縦に並べる */
+                align-items: center; /* ボタンを中央揃え */
+                gap: 10px; /* ボタン間の間隔を減らす */
+                margin-top: 30px;
+            }
+
+            .problems-cta .btn,
+            .problems-cta .btn-outline {
+                width: 100%; /* ボタンを幅いっぱいに */
+                max-width: 280px; /* 最大幅を設定 */
+                text-align: center;
+            }
+
+            .problems-image {
+                width: 100%;
+                margin-top: 30px; /* 上のマージンを減らす */
+                order: 2; /* 画像を後に表示 */
+                align-self: center; /* 中央揃え */
+            }
+
+            .problems-image img {
+                max-width: 85%; /* 画像サイズを少し小さく */
+            }
+        }
+
+        /* さらに小さい画面サイズでの調整 */
+        @media (max-width: 480px) {
+            .problems {
+                padding: 50px 0; /* さらにパディングを減らす */
+            }
+
+            .problems-title {
+                font-size: 1.6rem; /* さらにタイトルを小さく */
+            }
+
+
+            .problem-icon {
+                width: 35px; /* アイコンをさらに小さく */
+                height: 35px;
+                font-size: 1.2rem;
+                padding: 8px;
+            }
+
+            .problems-image img {
+                max-width: 95%; /* 小さい画面では画像を大きく */
+            }
+        }
+
+        
+
+        /* 課題共感セクション */
+        .problems {
+            background-color: var(--bg-light);
+        }
+
+        .problems .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .problems-content {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .problems-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--main-color);
+        }
+
+        .problem-item {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .problem-icon {
+            font-size: 1.5rem;
+            color: var(--main-color);
+            margin-right: 15px;
+            background-color: rgba(255, 120, 66, 0.1); /* 薄オレンジ色はそのまま */
+            padding: 10px;
+            border-radius: 10px; /* 円形から角丸四角に変更（値を小さくする） */
+            /* 必要に応じて幅と高さを明示的に設定 */
+            width: 45px; /* 幅を設定 */
+            height: 45px; /* 高さを設定 */
+            display: flex; /* フレックスボックスを使用 */
+            justify-content: center; /* 水平方向中央揃え */
+            align-items: center; /* 垂直方向中央揃え */
+        }
+
+        .problem-text {
+            
+            width: 100%;
+        }
+
+        .problem-text h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--sub-color-3);
+        }
+        .problem-text p {
+            font-size:1rem; /* 文字サイズを小さく */
+            line-height: 1.5; /* 行間も調整 */
+        }
+
+        .highlight-text {
+            color: var(--sub-color-3); /* アクセントカラー(#00a268)を使用 */
+            font-weight: bold; /* 太字にする */
+        }
+        .problems-cta {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .problems-image {
+            flex: 1;
+            text-align: center;
+            margin-top: 50px;
+            align-self: flex-end;
+        }
+
+        .problems-image img {
+            max-width: 95%;
+            border-radius: 10px;
+            box-shadow: none;
+        }
+
+        .mobile-problems .problems-title-container {
+            order: 1;
+        }
+
+        .mobile-problems .problems-items-container {
+            order: 2;
+        }
+
+        .mobile-problems .problems-image {
+            order: 3; /* 画像を3番目に配置 */
+        }
+
+        .mobile-problems .problems-cta {
+            order: 4; /* CTAを4番目（最後）に配置 */
+        }
+
+        .mobile-problems .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        .mobile-problems .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mobile-problems .problems-title-container {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .mobile-problems .problems-title {
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--main-color);
+        }
+
+        .mobile-problems .problems-items-container {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .mobile-problems .problem-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .mobile-problems .problem-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.3rem;
+            margin-right: 15px;
+            background-color: rgba(255, 120, 66, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-problems .problem-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--sub-color-3);
+        }
+
+        .mobile-problems .problem-text p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .mobile-problems .problems-image {
+            width: 100%;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+
+        .mobile-problems .problems-image img {
+            max-width: 85%;
+            border-radius: 10px;
+        }
+
+        .mobile-problems .problems-cta {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mobile-problems .problems-cta .btn,
+        .mobile-problems .problems-cta .btn-outline {
+            width: 80%;
+            max-width: 280px;
+            text-align: center;
+        }
+
+     
+
+        /* 特徴セクション */
+        .features {
+            padding: 50px 0 80px; 
+            background-color: var(--text-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .feature-box {
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--main-color);
+            margin-right: 15px;
+            margin-bottom: 15px; 
+            background-color: rgba(255, 120, 66, 0.1); /* 薄オレンジ色はそのまま */
+            padding: 10px;
+            border-radius: 10px; /* 円形から角丸四角に変更（値を小さくする） */
+            /* 必要に応じて幅と高さを明示的に設定 */
+            width: 60px; /* 幅を設定 */
+            height: 60px; /* 高さを設定 */
+            display: flex; /* フレックスボックスを使用 */
+            justify-content: center; /* 水平方向中央揃え */
+            align-items: center; /* 垂直方向中央揃え */
+        }
+        
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--sub-color-3);
+        }
+        .feature-title p {
+            font-size: 0.9rem; /* 文字サイズを小さく */
+            line-height: 1.5; /* 行間も調整 */
+        }
+
+        .feature-image {
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        /* モバイル対応 - 特徴を縦に並べる */
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr; /* モバイルでは1列に変更 */
+                gap: 25px; /* 間隔を少し狭める */
+            }
+            
+            .feature-box {
+                padding: 25px 20px; /* 余白を少し減らす */
+            }
+            
+            .feature-icon {
+                width: 50px; /* アイコンサイズを少し小さく */
+                height: 50px;
+                font-size: 2rem;
+            }
+            
+            .feature-title {
+                font-size: 1.2rem; /* フォントサイズを少し小さく */
+            }
+            
+            .feature-box p {
+                font-size: 0.95rem; /* 説明文のフォントサイズを少し小さく */
+            }
+            
+            /* ホバー効果をタッチデバイスでは無効化 */
+            .feature-box:hover {
+                transform: none;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            }
+            
+            /* 特徴画像のサイズを調整 */
+            .feature-image {
+                margin-top: 15px;
+                max-height: 180px; /* 高さを制限 */
+                object-fit: cover; /* アスペクト比を維持 */
+            }
+        }
+
+        /* さらに小さい画面サイズでの調整 */
+        @media (max-width: 480px) {
+            .features {
+                padding: 40px 0 60px; /* セクション自体のパディングを減らす */
+            }
+            
+            .features-grid {
+                gap: 20px; /* さらに間隔を狭める */
+            }
+            .feature-title {
+                font-size: 1.2rem; /* フォントサイズを少し小さく */
+            }
+            
+            
+            .feature-box {
+                padding: 20px 15px; /* さらに余白を減らす */
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 25px;
+            }
+            
+        }
+
+        .feature-coverage {
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .coverage-title {
+            margin-bottom: 20px;
+            color: var(--sub-color-3);
+            font-size: 1.3rem;
+        }
+
+        .coverage-image {
+            max-width: 100%;
+        }
+
+        .coverage-image img {
+            width: 85%;
+            box-shadow: none;
+            border: none;
+        }
+
+        .coverage-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin: 0 auto;
+            max-width: 90%;
+        }
+
+        @media (min-width: 769px) {
+            .coverage-image img {
+                width: 65%; /* デスクトップでは幅を65%に制限 */
+                max-width: 800px; /* 最大幅も設定 */
+                margin: 0 auto; /* 中央揃え */
+                display: block; /* ブロック要素として配置 */
+            }
+            
+            /* カバレッジセクション全体の余白も調整 */
+            .feature-coverage {
+                padding: 30px 40px; /* 上下左右の余白を増やす */
+                max-width: 100%; /* 全体の幅も少し制限 */
+                margin: 0 auto 40px; /* 中央揃え */
+            }
+            
+            /* テキストの配置も調整 */
+            .coverage-text {
+                margin-top: 20px; /* テキストと画像の間に余白を追加 */
+                font-size: 1.1rem; /* フォントサイズを少し大きく */
+            }
+        }
+
+        /* モバイル対応 */
+        @media (max-width: 768px) {
+            .feature-coverage {
+                padding: 20px 15px;
+                margin-bottom: 30px;
+            }
+            
+            .coverage-title {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+            
+            .coverage-image {
+                max-width: 110%;
+            }
+            
+            .coverage-text {
+                font-size: 0.95rem;
+                line-height: 1.5;
+                max-width: 110%;
+            }
+        }
+
+        /* 小さい画面向けのさらなる調整 */
+        @media (max-width: 480px) {
+            .feature-coverage {
+                padding: 15px 12px;
+                margin-bottom: 25px;
+            }
+            
+            .coverage-title {
+                font-size: 1.1rem;
+            }
+            
+            .coverage-text {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* 利用の流れセクション */
+        .workflow {
+            padding: 50px 0 5px; 
+            background-color: var(--bg-light);
+        }
+
+        .workflow-comparison-container {
+            margin-bottom: 0px;
+            padding: 20px;
+            background-color: var(--bg-light);
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .workflow-comparison-container.accent {
+            background-color: rgba(255, 120, 66, 0.05);
+            border: 2px solid var(--main-color);
+        }
+        
+        .workflow-comparison-title {
+            font-size: 1.3rem;
+            color: var(--sub-color-3);
+            margin-bottom: 5px;
+            text-align: left;
+            padding-bottom: 10px;
+        }
+        
+        .workflow-comparison-title.accent {
+            color: var(--main-color);
+        }
+        
+
+        .workflow-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            flex-wrap: wrap;
+        }
+        
+        .workflow-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 30px;
+            right: 30px;
+            height: 4px;
+            background-color: var(--sub-color-1);
+            z-index: 1;
+        }
+
+
+    
+
+        .workflow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            padding: 0 10px;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--main-color);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .step-number.accent {
+            background-color: var(--accent-color);
+        }
+    
+
+        .step-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--sub-color-3);
+        }
+
+        .step-description {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .workflow-comparison {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+        .workflow-column {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .workflow-column-title {
+            font-size: 1.4rem;
+            padding: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--sub-color-3);
+            background-color: var(--bg-light);
+            border-radius: 10px;
+        }
+
+        .workflow-column-title.accent {
+            background-color: var(--main-color);
+            color: var(--text-light);
+        }
+
+        .workflow-steps-vertical {
+            position: relative;
+        }
+
+        .workflow-steps-vertical::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            bottom: 60px;
+            left: 29px;
+            width: 4px;
+            background-color: var(--sub-color-1);
+            z-index: 1;
+        }
+
+        .workflow-column:nth-child(2) .workflow-steps-vertical::before {
+            background-color: var(--accent-color);
+        }
+        /* 導入後のステップ内の各コンテナにメインカラーの枠線を追加 */
+        .workflow-label-container.accent + .workflow-steps-container .step-content {
+            border: 2px solid var(--main-color);
+            padding: 15px 10px;
+        }
+
+        .workflow-step-vertical {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+
+        .step-number-vertical {
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background-color: var(--main-color);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .step-number-vertical.accent {
+            background-color: var(--accent-color);
+        }
+
+        .step-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px 10px;
+            height: 100%;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-title-vertical {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--sub-color-3);
+        }
+
+        .step-description-vertical {
+            font-size: 1rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .step-icon {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 1.5rem;
+            color: var(--main-color);
+        }
+
+        .step-icon.accent {
+            color: var(--accent-color);
+        }
+        .step-illustration {
+            margin: 5px 0 5px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .step-img {
+            max-width: 100%;
+            max-height: 100px;
+            object-fit: contain;
+        }
+
+        .workflow-cta {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .workflow-cta-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--sub-color-3);
+            margin-bottom: 20px;
+        }
+
+        .workflow-common-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-left: 120px; /* ラベル分の幅を空ける */
+        }
+        
+        .workflow-step-header {
+            flex: 1;
+            text-align: center;
+            padding: 0 15px;
+            min-width: 200px;
+        }
+        
+        .step-common-title {
+            font-size: 1.3rem;
+            color: var(--sub-color-3);
+            font-weight: bold;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--main-color);
+        }
+        
+        .workflow-comparison-row {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .workflow-label-container {
+            width: 190px;
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-right: 20px;
+        }
+        
+        .workflow-label-container.accent {
+            background-color: rgba(255, 120, 66, 0.1);
+            
+        }
+        
+        .workflow-label {
+            font-size: 1rem;
+            color: var(--sub-color-3);
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .workflow-steps-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            flex-wrap: nowrap;
+        }
+
+
+        /* 料金プランセクション */
+        .pricing {
+            padding: 50px 0 80px; /* 上のパディングを80pxから50pxに減らした例 */
+        }
+        .pricing-comparison-container {
+            overflow-x: auto; /* モバイル対応のための横スクロール */
+            margin: 50px 0;
+        }
+        
+        .pricing-comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            text-align: center;
+        }
+
+        .coming-soon-tag {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #999; /* グレー色 */
+        color: var(--text-light);
+        font-size: 0.8rem;
+        font-weight: bold;
+        padding: 5px 15px;
+        border-radius: 20px;
+        white-space: nowrap;
+        z-index: 20;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+        /* グレーアウトスタイル */
+        .disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        /* 価格のグレーアウト */
+        .plan-price.disabled {
+            color: #999;
+        }
+        
+        /* ボタンのグレーアウト */
+        .btn.disabled {
+            background-color: #999;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+            
+        /* ヘッダー部分 */
+        .pricing-comparison-table th {
+            padding: 20px;
+            background-color: var(--bg-light);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .feature-header {
+            text-align: left;
+            width: 250px;
+            font-size: 1.2rem;
+            color: var(--sub-color-3);
+        }
+        
+        .plan-header {
+            min-width: 200px;
+            padding: 41px 20px !important;
+            position: relative;
+            transition: all 0.3s ease;
+            vertical-align: top;
+        }
+        
+        .plan-header.popular {
+            background-color: rgba(255, 120, 66, 0.05);
+            border: 2px solid var(--main-color);
+            
+            padding-top: 40px !important; /* おすすめタグ用に上部の余白を増やす */
+          
+            z-index: 10;
+        }
+        
+        /* おすすめプランのセル */
+        .popular-cell {
+     
+            border-left: 2px solid var(--main-color);
+            border-right: 2px solid var(--main-color);
+        }
+        
+        /* 最後の行のセル */
+        tbody tr:last-child .popular-cell {
+            border-bottom: 2px solid var(--main-color);
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        
+        .popular-tag {
+            position: absolute;
+            top: 5px; /* 上に移動 */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--main-color);
+            color: var(--text-light);
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 20px;
+            white-space: nowrap;
+            z-index: 20;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .plan-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--sub-color-3);
+            margin-bottom: 10px;
+        }
+        
+        .plan-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--main-color);
+            margin-bottom: 20px;
+        }
+        
+        .plan-price span {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        
+        .plan-header .btn {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        /* テーブルボディ部分 */
+        .pricing-comparison-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .feature-name {
+            text-align: left;
+            font-weight: bold;
+            color: var(--sub-color-3);
+        }
+        
+        .feature-value {
+            color: var(--text-dark);
+        }
+        
+        /* アイコンのスタイル */
+        .feature-value .fa-check {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        .feature-value .fa-times {
+            color: #ccc;
+            font-size: 1.2rem;
+        }
+        
+        /* ホバー効果 */
+        .pricing-comparison-table tbody tr:hover {
+            background-color: rgba(0,0,0,0.01);
+        }
+
+
+    
+        /* ストーリーセクション */
+        .story {
+            background-color: var(--bg-light);
+        }
+
+        .story-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .story-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .story-image img {
+            max-width: 100%;
+            border-radius: 50%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .story-content {
+            flex: 2;
+        }
+
+        .story-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--main-color);
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* CTA セクション */
+        .cta {
+            background: linear-gradient(135deg, var(--main-color) 0%, var(--sub-color-1) 100%);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .cta .btn {
+            background-color: var(--text-light);
+            color: var(--main-color);
+        }
+
+        .cta .btn:hover {
+            background-color: var(--bg-light);
+        }
+
+        .cta .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--text-light);
+            color: var(--text-light);
+        }
+
+        .cta .btn-outline:hover {
+            background-color: var(--text-light);
+            color: var(--main-color);
+        }
+
+        /* モバイル対応 - CTAセクションをコンパクトに */
+        @media (max-width: 768px) {
+            .cta {
+                padding: 50px 0; /* パディングを縮小 */
+            }
+            
+            .cta-title {
+                font-size: 1.8rem; /* タイトルを小さく */
+                margin-bottom: 15px; /* マージンを減らす */
+            }
+            
+            .cta-subtitle {
+                font-size: 1rem; /* サブタイトルを小さく */
+                margin-bottom: 30px; /* マージンを減らす */
+                padding: 0 10px; /* 左右のパディングを追加 */
+            }
+            
+            .cta-buttons {
+                flex-direction: column; /* ボタンを縦に並べる */
+                align-items: center; /* 中央揃え */
+                gap: 15px; /* 間隔を調整 */
+            }
+            
+            .cta .btn,
+            .cta .btn-outline {
+                width: 80%; /* 幅を調整 */
+                max-width: 250px; /* 最大幅を設定 */
+                padding: 10px 20px; /* パディングを調整 */
+                font-size: 0.95rem; /* フォントサイズを小さく */
+            }
+        }
+
+        /* さらに小さい画面サイズでの調整 */
+        @media (max-width: 480px) {
+            .cta {
+                padding: 40px 0; /* さらにパディングを縮小 */
+            }
+            
+            .cta-title {
+                font-size: 1.6rem; /* さらに小さく */
+            }
+            
+            .cta-subtitle {
+                font-size: 0.9rem; /* さらに小さく */
+                line-height: 1.4; /* 行間を調整 */
+            }
+            
+            .cta .btn,
+            .cta .btn-outline {
+                width: 90%; /* 幅を広げる */
+                font-size: 0.9rem; /* さらに小さく */
+            }
+        }
+
+        /* フッター */
+        .footer {
+            background-color: var(--sub-color-3);
+            color: var(--text-light);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            gap: 40px;
+        }
+
+        .footer-logo {
+            flex: 1;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+
+        .footer-links {
+            flex: 1;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--sub-color-2);
+        }
+
+        .footer-list {
+            list-style: none;
+        }
+
+        .footer-list li {
+            list-style-type: none;
+            margin-bottom: 10px;
+        }
+
+        .footer-list a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-list a:hover {
+            color: var(--sub-color-2);
+        }
+
+        .footer-contact {
+            flex: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+            margin-right: 15px;
+            color: var(--sub-color-2);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--main-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+        }
+        .credits {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            font-size: 0.75rem; /* より小さいフォント */
+            color: rgba(255, 255, 255, 0.5); /* 薄い色 */
+            margin-top: 5px;
+        }
+        .container .copyright {
+            padding-right: 20px; /* コンテナのパディングを考慮 */
+        }
+
+        /* モバイル対応 - フッターを縦に並べる */
+    @media (max-width: 768px) {
+        .footer {
+            padding: 40px 0 20px; /* 上部パディングを少し減らす */
+        }
+        
+        .footer-content {
+            flex-direction: column; /* 縦方向に並べる */
+            gap: 30px; /* 間隔を少し狭める */
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo, 
+        .footer-links, 
+        .footer-contact {
+            width: 100%; /* 幅いっぱいに */
+            text-align: center; /* テキストを中央揃え */
+        }
+        
+        .footer-text {
+            max-width: none; /* 最大幅の制限を解除 */
+            margin: 0 auto 20px; /* 中央揃え */
+        }
+        
+        .footer-title {
+            text-align: center; /* タイトルを中央揃え */
+            margin-bottom: 15px; /* マージンを少し減らす */
+        }
+        
+        .footer-list {
+            text-align: center; /* リストを中央揃え */
+        }
+        
+        .footer-list li {
+            margin-bottom: 8px; /* 項目間のマージンを少し減らす */
+        }
+        
+        .social-links {
+            justify-content: center; /* ソーシャルリンクを中央揃え */
+            margin-top: 15px;
+        }
+        
+        /* クレジットを位置固定から解除 */
+        .credits {
+            position: static; /* 通常フローに戻す */
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .container .copyright {
+            padding-right: 0; /* 右のパディングを削除 */
+        }
+    }
+
+        /* レスポンシブ */
+        @media (max-width: 992px) {
+                .hero-content {
+                    padding-right: 20px;
+                }
+            }
+            
+
+        @media (max-width: 992px) {
+            .workflow-common-steps {
+                display: none; /* 小さい画面では共通タイトルを非表示 */
+            }
+            
+            .workflow-comparison-row {
+                flex-direction: column;
+            }
+            
+            .workflow-label-container {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
+                padding: 5px;
+            }
+            
+            .workflow-label {
+                display: block;
+                width: 100%;
+            }
+            
+            .workflow-steps {
+                flex-wrap: wrap;
+            }
+            
+            .workflow-steps::before {
+                display: none;
+            }
+            
+            .workflow-step {
+                width: 48%;
+                margin-bottom: 15px;
+            }
+            
+            /* 小さい画面でのステップタイトル表示 */
+            .workflow-step::before {
+                content: attr(data-title);
+                display: block;
+                font-size: 1.1rem;
+                font-weight: bold;
+                color: var(--sub-color-3);
+                margin-bottom: 10px;
+            }
+        }
+
+         @media (max-width: 768px) {
+            .nav-links li:not(:last-child) a {
+                top: 0; /* モバイル表示ではトップ位置をリセット */
+                padding-bottom: 0;
+            }
+            
+            .header {
+                padding-bottom: 0; /* モバイル表示では下部パディングをリセット */
+            }
+        }
+         @media (max-width: 768px) {
+            .plan-header.popular {
+                transform: scale(1); /* モバイルでは拡大しない */
+                padding-top: 40px !important; /* おすすめタグのスペースを確保 */
+            }
+            
+            .feature-header {
+                width: 150px;
+            }
+            
+            .plan-header {
+                min-width: 150px;
+            }
+            
+            .plan-name {
+                font-size: 1.1rem;
+            }
+            
+            .plan-price {
+                font-size: 1.6rem;
+            }
+            
+            .popular-tag {
+                top: -12px;
+                font-size: 0.7rem;
+                padding: 4px 10px;
+            }
+        }
+        
+        /* モバイル対応の料金プラン */
+
+        /* 料金プランセクション */
+        .pricing {
+            padding: 50px 0 80px;
+        }
+
+        .pricing-comparison-container {
+            margin: 50px 0;
+        }
+
+        /* テーブルスタイル - デスクトップ用 */
+        .pricing-comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            text-align: center;
+        }
+
+        /* モバイル表示時のカードレイアウト用コンテナ */
+        .pricing-cards-container {
+            display: none; /* デフォルトでは非表示 */
+        }
+
+        /* タグスタイル */
+        .popular-tag, .coming-soon-tag {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 20px;
+            white-space: nowrap;
+            z-index: 20;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .popular-tag {
+            background-color: var(--main-color);
+            color: var(--text-light);
+        }
+
+        .coming-soon-tag {
+            background-color: #999;
+            color: var(--text-light);
+        }
+
+        /* プラン基本情報 */
+        .plan-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--sub-color-3);
+            margin-bottom: 10px;
+        }
+
+        .plan-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--main-color);
+            margin-bottom: 20px;
+        }
+
+        .plan-price span {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .plan-price.disabled {
+            color: #999;
+        }
+
+        /* モバイル用カードスタイル */
+        .pricing-card {
+            background-color: var(--bg-light);
+            border-radius: 15px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            text-align: center;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--main-color);
+            background-color: rgba(255, 120, 66, 0.05);
+        }
+
+        .pricing-card-header {
+            padding: 20px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .pricing-card-body {
+            text-align: left;
+        }
+
+        .pricing-feature {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .pricing-feature-name {
+            font-weight: bold;
+            color: var(--sub-color-3);
+        }
+
+        .pricing-feature-value {
+            color: var(--text-dark);
+        }
+
+        .pricing-feature-value .fa-check {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .pricing-feature-value .fa-times {
+            color: #ccc;
+            font-size: 1.2rem;
+        }
+
+        .pricing-card-footer {
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .pricing-card-footer .btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+        }
+        #pricing .section-title {
+            margin-bottom: -30px; /* 元の60pxから5pxに大幅削減 */
+        }
+
+        /* モバイル対応 */
+        @media (max-width: 768px) {
+            /* テーブルを非表示 */
+            .pricing-comparison-table {
+                display: none;
+            }
+            
+            /* カードレイアウトを表示 */
+            .pricing-cards-container {
+                display: block;
+            }
+            
+            /* カードのマージン調整 */
+            .pricing-card {
+                margin: 0 auto 30px;
+                max-width: 90%;
+            }
+            
+            /* ヘッダー・フッターの余白調整 */
+            .pricing-card-header, .pricing-card-footer {
+                padding: 15px 0;
+            }
+            
+            /* フィーチャーの余白調整 */
+            .pricing-feature {
+                padding: 10px 0;
+            }
+            
+            /* フォントサイズ調整 */
+            .plan-name {
+                font-size: 1.2rem;
+            }
+            
+            .plan-price {
+                font-size: 1.8rem;
+            }
+            
+            .pricing-feature-name {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .workflow-comparison {
+                flex-direction: column;
+            }
+
+            .workflow-column {
+                width: 100%;
+            }
+            .workflow-label-container:not(.accent) .workflow-label {
+                color: #666666; /* 濃いめのグレー */
+            }
+            
+            /* 導入前のコンテナ自体の背景色も少し調整（オプション） */
+            .workflow-label-container:not(.accent) {
+                background-color: #e6e6e6; /* やや濃いめのグレー背景 */
+            }
+
+
+        }
+        @media (max-width: 576px) {
+            .workflow-step {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
 <body>
-  <h1> Under Construction </h1>
+    <!-- ヘッダーの修正 - ナビゲーションメニュー追加 -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.svg" alt="TremasFinder Logo">
+            </div>
+            <!-- モバイル版用の問い合わせボタン -->
+            <div class="mobile-contact-btn">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfYPOiL38QSzJKuSpWiE_sAcPImattnHHUa_VkdZtL70Vdpqw/viewform?usp=header" class="btn">問い合わせ</a>
+            </div>
+            <!-- ナビゲーションメニュー追加 -->
+            <nav class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#features">特徴</a></li>
+                    <li><a href="#workflow">利用の流れ</a></li>
+                    <li><a href="#pricing">料金プラン</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" class="btn">ユーザー登録</a></li>
+                </ul>
+                
+                <!-- モバイル用メニューボタン -->
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- モバイル用メニュー -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="#features">特徴</a></li>
+            <li><a href="#workflow">利用の流れ</a></li>
+            <li><a href="#pricing">料金プラン</a></li>
+            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" class="btn-mobile">ユーザー登録</a></li>
+        </ul>
+    </div>
+
+    <!-- ファーストビュー -->
+    <section class="hero">
+        <div class="container">
+            <!-- デスクトップ表示用 -->
+            <div class="desktop-layout">
+                <div class="hero-content">
+                    <img src="images/hero-word.svg" alt="Amazon物販で最初の月3万円を達成したい" class="hero-title-svg desktop">
+                </div>
+                
+                <div class="hero-image">
+                    <img src="images/firstchath.jpg" alt="TremasFinder イメージ" loading="eager">
+                </div>
+                
+                <div class="hero-buttons desktop-buttons">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" target="_blank" class="btn-white">今すぐ始める</a>
+                    <a href="#features" class="btn-gray">Tremas Finderの特徴</a>
+                </div>
+            </div>
+            
+            <!-- モバイル表示用 - ヒーローセクション内のコンテンツとイメージのみ -->
+            <div class="mobile-layout">
+
+                
+                <div class="hero-image">
+                    <!-- モバイル専用の小さい画像を指定 -->
+                    <img src="images/firstchath-small.jpg" alt="TremasFinder イメージ" loading="eager">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- モバイル版専用のボタンセクション -->
+    <section class="mobile-buttons-section">
+        <div class="container">
+            <div class="hero-buttons mobile-buttons">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" target="_blank" class="btn-white">今すぐ始める</a>
+                <a href="#features" class="btn-gray">Tremas Finderの特徴</a>
+            </div>
+        </div>
+    </section>
+    <!-- 課題共感セクション -->
+    <section class="problems">
+        <div class="container">
+            <div class="problems-content">
+                <h2 class="problems-title">「何を仕入れればいいかわからない…」その悩みTremasFinderが解決します。</h2>
+                
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="problem-text">
+                        <h3>仕入れるべき商品がわからない</h3>
+                        <p>膨大な商品から、利益商品を見極めるのは至難の業。</br>TremasFinderは利益を生み出す可能性の高い商品をハイライト。</p>
+                    </div>
+                </div>
+
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="problem-text">
+                        <h3>リサーチに時間がかかりすぎる</h3>
+                        <p>商品ごとに売れ行きや競合状況を調べて…という作業は手間がかかります。TremasFinderは有益な情報を一目で把握できるよう可視化。</p>
+                    </div>
+                </div>
+
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <div class="problem-text">
+                        <h3>Keepaを導入したが使い方がわからない</h3>
+                        <p>Keepaの複雑な操作に戸惑い、挫折してしまう方も少なくありません。TremasFinderは直感的な操作でKeepaの利用をサポート。</p>
+                    </div>
+                </div>
+                
+                <div class="problems-cta">
+                    <a href="#features" class="btn">TremasFinderの特徴</a>
+                    <a href="#pricing" class="btn btn-outline">料金プラン</a>
+                </div>
+            </div>
+            
+            <div class="problems-image">
+                <img src="images/toolImagge.jpg" alt="アプリのスクリーンショット" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- モバイル用課題共感セクション -->
+    <section class="problems mobile-problems">
+        <div class="container">
+            <!-- 1. problems-title -->
+            <div class="problems-title-container">
+                <h2 class="problems-title">「何を仕入れればいいかわからない…」その悩みTremasFinderが解決します。</h2>
+            </div>
+            
+            <!-- 2. problem-item -->
+            <div class="problems-items-container">
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="problem-text">
+                        <h3>仕入れるべき商品がわからない</h3>
+                        <p>膨大な商品から、利益商品を見極めるのは至難の業。</br>TremasFinderは利益を生み出す可能性の高い商品をハイライト。</p>
+                    </div>
+                </div>
+
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="problem-text">
+                        <h3>リサーチに時間がかかりすぎる</h3>
+                        <p>商品ごとに売れ行きや競合状況を調べて…という作業は手間がかかります。TremasFinderは有益な情報を一目で把握できるよう可視化。</p>
+                    </div>
+                </div>
+
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <div class="problem-text">
+                        <h3>Keepaを導入したが使い方がわからない</h3>
+                        <p>Keepaの複雑な操作に戸惑い、挫折してしまう方も少なくありません。TremasFinderは直感的な操作でKeepaの利用をサポート。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3. problems-image -->
+            <div class="problems-image">
+                <img src="images/toolImagge.jpg" alt="アプリのスクリーンショット" loading="lazy">
+            </div>
+            
+            <!-- 4. problems-cta -->
+            <div class="problems-cta">
+                <a href="#features" class="btn">TremasFinderの特徴</a>
+                <a href="#pricing" class="btn btn-outline">料金プラン</a>
+            </div>
+        </div>
+    </section>
+        
+
+    <!-- 特徴セクション -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Tremas Finderの特徴</h2>
+
+            <!-- カバーする業務範囲部分 -->
+            <div class="feature-coverage">
+                <h3 class="feature-title coverage-title">業務カバー範囲</h3>
+                <div class="coverage-image">
+                    <img src="images/coverage-image.jpg" alt="TremasFinderがカバーする業務範囲" class="feature-image" loading="lazy">
+                </div>
+                <p class="coverage-text">
+                    TremasFinderは物販の業務の中でも最も手間がかかる「仕入商品リサーチ」を効率化します。
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3 class="feature-title">自然な言葉で検索できるから迷わない</h3>
+                    <p>気になる商品ジャンルや特徴を自然な文章で入力するだけで、Keepaの検索条件を自動で設定。ワンクリックで対象商品をすぐに確認できるので、初心者でも迷わずリサーチが進みます。</p>
+                    <img src="images/placeholder-feature1.jpg" alt="高速なデータ分析" class="feature-image" loading="lazy">
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="far fa-eye"></i>
+                    </div>
+                    <h3 class="feature-title">CSVを取り込むだけで利益商品が一目瞭然</h3>
+                    <p>Keepaで取得したCSVをアップロードするだけで、自動的に各商品のスコアを算出。利益が出やすい商品から順に一覧表示され、仕入れ判断がすぐにできます。</p>
+                    <img src="images/placeholder-feature2.jpg" alt="トレンド予測機能" class="feature-image" loading="lazy">
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">グラフで競合や利益がひと目でわかる</h3>
+                    <p>競合の多さ、利益率、需要などの状況を見やすいグラフで表示。感覚的に理解できるので、数字が苦手な方でも安心して判断できます。</p>
+                    <img src="images/placeholder-feature3.jpg" alt="リスク分析" class="feature-image" loading="lazy">
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="feature-title">面倒なリサーチ作業をギュッと時短化</h3>
+                    <p>商品の利益性・需要・競合までを自動で分析。今まで時間がかかっていたリサーチが、たった数クリックで完了します。</p>
+                    <img src="images/placeholder-feature4.jpg" alt="カスタマイズ可能な検索条件" class="feature-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 利用の流れ -->
+    <section class="workflow" id="workflow">
+        <div class="container">
+            <h2 class="section-title">仕入リサーチの手間を短縮</h2>
+            
+            <!-- 共通のステップタイトル -->
+            <div class="workflow-common-steps">
+                <div class="workflow-step-header">
+                    <h3 class="step-common-title">商品検索</h3>
+                </div>
+                <div class="workflow-step-header">
+                    <h3 class="step-common-title">仕入れ候補選定</h3>
+                </div>
+                <div class="workflow-step-header">
+                    <h3 class="step-common-title">詳細調査</h3>
+                </div>
+                <div class="workflow-step-header">
+                    <h3 class="step-common-title">仕入れ</h3>
+                </div>
+            </div>
+            
+            <div class="workflow-comparison-row">
+                <!-- 左側：従来の方法ラベル -->
+                <div class="workflow-label-container">
+                    <h3 class="workflow-label">導入前</h3>
+                </div>
+                
+                <!-- 右側：従来の方法のステップ内容 -->
+                <div class="workflow-steps-container">
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="step-content">
+                                <div class="step-illustration">
+                                    <img src="images/before-step1.jpg" alt="膨大な商品から検索" class="step-img">
+                                </div>
+                                <p class="step-description">大量の項目に圧倒されどう設定すればいいかわからない。検索条件を変えて何度もやり直し。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-content">
+                                <div class="step-illustration">
+                                    <img src="images/before-step2.jpg" alt="手作業でのデータ収集" class="step-img">
+                                </div>
+                                <p class="step-description">一覧を開いて、並べ替えて、グラフを見て…気になる商品が見つかるまで何百回も繰り返す。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-content">
+                                <div class="step-illustration">
+                                    <img src="images/before-step3.jpg" alt="判断に迷う様子" class="step-img">
+                                </div>
+                                <p class="step-description">需要や利益、注意事項等の調査のためひとつひとつネットで検索して確認。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-content">
+                                <div class="step-illustration">
+                                    <img src="images/before-step4.jpg" alt="不安な仕入れ" class="step-img">
+                                </div>
+                                <p class="step-description">選定に時間がかかり、仕入の判断が遅れてチャンスを逃しがち。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="workflow-comparison-row">
+                <!-- 左側：TremasFinder活用後ラベル -->
+                <div class="workflow-label-container accent">
+                    <h3 class="workflow-label">導入後</h3>
+                </div>
+                
+                <!-- 右側：TremasFinder活用後のステップ内容 -->
+                <div class="workflow-steps-container">
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="step-content">
+                                <div class="step-illustration">
+                                    <img src="images/after-step1.jpg" alt="自然言語での検索" class="step-img">
+                                </div>
+                                <p class="step-description">「売れてる夏の消耗品」など、入力するだけで適切な検索条件を提案。初心者でも迷わない。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-content">
+                                <div class="step-illustration">
+                                    <img src="images/after-step2.jpg" alt="CSVでの自動分析" class="step-img">
+                                </div>
+                                <p class="step-description">CSVを取り込むだけで、利益率・競合・需要などのスコアを自動算出。上から見るだけ。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-content">
+                                <div class="step-illustration">
+                                    <img src="images/after-step3.jpg" alt="明確な基準での選定" class="step-img">
+                                </div>
+                                <p class="step-description">需要、利益見込や注意点など、仕入れ判断に必要な情報を一画面で把握。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-content">
+                                <div class="step-illustration">
+                                    <img src="images/after-step4.jpg" alt="自信を持った仕入れ" class="step-img">
+                                </div>
+                                <p class="step-description">根拠のある仕入れ候補が見つかるのですぐに行動に移せる。スピードが利益を生む。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </section>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 共通タイトルを取得
+        var commonTitles = document.querySelectorAll('.step-common-title');
+        
+        // 各行のステップに対応するタイトルを設定
+        var rows = document.querySelectorAll('.workflow-comparison-row');
+        rows.forEach(function(row) {
+            var steps = row.querySelectorAll('.workflow-step');
+            steps.forEach(function(step, index) {
+                if (commonTitles[index]) {
+                    step.setAttribute('data-title', commonTitles[index].textContent);
+                }
+            });
+        });
+    });
+    </script>
+
+
+   
+    <!-- 料金プラン -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">料金プラン</h2>
+            
+            <!-- 料金プラン比較テーブル（デスクトップ用） -->
+            <div class="pricing-comparison-container">
+                <table class="pricing-comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="feature-header">機能</th>
+                            <th class="plan-header">
+                                <div class="plan-name">フリープラン</div>
+                                <div class="plan-price">¥0<span>/月</span></div>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" target="_blank" class="btn">今すぐ始める</a>
+                            </th>
+                            <th class="plan-header popular">
+                                <div class="popular-tag">おすすめ</div>
+                                <div class="plan-name">スタンダードプラン</div>
+                                <div class="plan-price">¥500<span>/月</span></div>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" target="_blank" class="btn">今すぐ始める</a>
+                            </th>
+                            <th class="plan-header">
+                                <div class="coming-soon-tag">準備中</div>
+                                <div class="plan-name">プロフェッショナルプラン</div>
+                                <div class="plan-price disabled">¥3,800<span>/月</span></div>
+                                <a href="#" class="btn disabled">近日公開</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">日次検索回数</td>
+                            <td class="feature-value">3回</td>
+                            <td class="feature-value popular-cell">無制限</td>
+                            <td class="feature-value">無制限</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">1回あたりのデータ処理件数</td>
+                            <td class="feature-value">100件</td>
+                            <td class="feature-value popular-cell">5,000件</td>
+                            <td class="feature-value">5,000件</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">CSVインポート・分析</td>
+                            <td class="feature-value"><i class="fas fa-check"></i></td>
+                            <td class="feature-value popular-cell"><i class="fas fa-check"></i></td>
+                            <td class="feature-value"><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">詳細グラフ分析</td>
+                            <td class="feature-value"><i class="fas fa-check"></i></td>
+                            <td class="feature-value popular-cell"><i class="fas fa-check"></i></td>
+                            <td class="feature-value"><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">自然言語検索</td>
+                            <td class="feature-value"><i class="fas fa-times"></i></td>
+                            <td class="feature-value popular-cell"><i class="fas fa-times"></i></td>
+                            <td class="feature-value"><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">TODO・達成状況可視化</td>
+                            <td class="feature-value"><i class="fas fa-times"></i></td>
+                            <td class="feature-value popular-cell"><i class="fas fa-times"></i></td>
+                            <td class="feature-value"><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">AI質問窓口</td>
+                            <td class="feature-value"><i class="fas fa-times"></i></td>
+                            <td class="feature-value popular-cell"><i class="fas fa-times"></i></td>
+                            <td class="feature-value"><i class="fas fa-check"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- モバイル用の料金プランカード -->
+            <div class="pricing-cards-container">
+                <!-- フリープラン -->
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <div class="plan-name">フリープラン</div>
+                        <div class="plan-price">¥0<span>/月</span></div>
+                    </div>
+                    <div class="pricing-card-body">
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">日次検索回数</div>
+                            <div class="pricing-feature-value">3回</div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">1回あたりのデータ処理件数</div>
+                            <div class="pricing-feature-value">100件</div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">CSVインポート・分析</div>
+                            <div class="pricing-feature-value"><i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">詳細グラフ分析</div>
+                            <div class="pricing-feature-value"><i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">自然言語検索</div>
+                            <div class="pricing-feature-value"><i class="fas fa-times"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">TODO・達成状況可視化</div>
+                            <div class="pricing-feature-value"><i class="fas fa-times"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">AI質問窓口</div>
+                            <div class="pricing-feature-value"><i class="fas fa-times"></i></div>
+                        </div>
+                    </div>
+                    <div class="pricing-card-footer">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" target="_blank" class="btn">今すぐ始める</a>
+                    </div>
+                </div>
+                
+                <!-- スタンダードプラン -->
+                <div class="pricing-card popular">
+                    <div class="popular-tag">おすすめ</div>
+                    <div class="pricing-card-header">
+                        <div class="plan-name">スタンダードプラン</div>
+                        <div class="plan-price">¥500<span>/月</span></div>
+                    </div>
+                    <div class="pricing-card-body">
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">日次検索回数</div>
+                            <div class="pricing-feature-value">無制限</div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">1回あたりのデータ処理件数</div>
+                            <div class="pricing-feature-value">5,000件</div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">CSVインポート・分析</div>
+                            <div class="pricing-feature-value"><i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">詳細グラフ分析</div>
+                            <div class="pricing-feature-value"><i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">自然言語検索</div>
+                            <div class="pricing-feature-value"><i class="fas fa-times"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">TODO・達成状況可視化</div>
+                            <div class="pricing-feature-value"><i class="fas fa-times"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">AI質問窓口</div>
+                            <div class="pricing-feature-value"><i class="fas fa-times"></i></div>
+                        </div>
+                    </div>
+                    <div class="pricing-card-footer">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" target="_blank" class="btn">今すぐ始める</a>
+                    </div>
+                </div>
+                
+                <!-- プロフェッショナルプラン -->
+                <div class="pricing-card">
+                    <div class="coming-soon-tag">準備中</div>
+                    <div class="pricing-card-header">
+                        <div class="plan-name">プロフェッショナルプラン</div>
+                        <div class="plan-price disabled">¥3,800<span>/月</span></div>
+                    </div>
+                    <div class="pricing-card-body">
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">日次検索回数</div>
+                            <div class="pricing-feature-value">無制限</div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">1回あたりのデータ処理件数</div>
+                            <div class="pricing-feature-value">5,000件</div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">CSVインポート・分析</div>
+                            <div class="pricing-feature-value"><i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">詳細グラフ分析</div>
+                            <div class="pricing-feature-value"><i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">自然言語検索</div>
+                            <div class="pricing-feature-value"><i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">TODO・達成状況可視化</div>
+                            <div class="pricing-feature-value"><i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-feature-name">AI質問窓口</div>
+                            <div class="pricing-feature-value"><i class="fas fa-check"></i></div>
+                        </div>
+                    </div>
+                    <div class="pricing-card-footer">
+                        <a href="#" class="btn disabled">近日公開</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ストーリー -->
+    <!-- <section class="story" id="story">
+        <div class="container">
+            <div class="story-container">
+                <div class="story-image">
+                    <img src="placeholder-founder.jpg" alt="創業者の画像">
+                </div>
+                <div class="story-content">
+                    <h2 class="story-title">開発ストーリー</h2>
+                    <p class="story-text">14年間ITエンジニア＆コンサルタントとして多くの企業や個人の業務自動化や効率化に携わってきました。その経験を活かし、自身も物販副業にチャレンジしました。</p>
+                    <p class="story-text">しかし、既存の多くのツールでは何を選ぶべきか迷い、特にKeepaを使用した際には膨大な仕入商品のデータに忙殺され、効率的なリサーチができませんでした。</p>
+                    <p class="story-text">「もっと直感的で、初心者でも使いやすく、本当に利益を出せる商品を見つけられるツールがあれば」という思いから、TremasFinderの開発を決意しました。</p>
+                    <p class="story-text">TremasFinderは、私自身が物販ビジネスで直面した課題を解決するために作られました。このツールがあなたのビジネスの成長をサポートし、目標達成の手助けになれば幸いです。</p>
+                </div>
+            </div>
+        </div>
+    </section>-->
+
+    <!-- CTA -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <h2 class="cta-title">ユーザー登録はこちら</h2>
+            <p class="cta-subtitle">TremasFinderを体験ください</p>
+            
+            <div class="cta-buttons">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc018aEyl0p8LyFo_5GVkXGF4FlSFnHz5CMy4B5Z-gPUrWM8g/viewform?usp=dialog" target="_blank" class="btn">無料でお試し</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfYPOiL38QSzJKuSpWiE_sAcPImattnHHUa_VkdZtL70Vdpqw/viewform?usp=header" target="_blank" class="btn btn-outline">お問い合わせ</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo-white.svg" alt="TremasFinder Logo">
+                    <p class="footer-text">TremasFinderは物販に関するあなたのビジネスの立ち上げ、成長をサポートします。</p>
+                    <div class="social-links">
+                        <a href="https://x.com/tremas_finder" aria-label="X" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title">クイックリンク</h3>
+                    <ul class="footer-list">
+                        <li><a href="#features">特徴</a></li>
+                        <li><a href="#workflow">利用の流れ</a></li>
+                        <li><a href="#pricing">料金プラン</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title">サポート</h3>
+                    <ul class="footer-list">
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfYPOiL38QSzJKuSpWiE_sAcPImattnHHUa_VkdZtL70Vdpqw/viewform?usp=header" target="_blank">お問い合わせ</a></li>
+                        <li><a href="privacy-policy.html">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 TremasFinder. All Rights Reserved.</p>
+                <div class="credits">
+                    <p>このサイトの一部の画像はGeminiにより作成されています</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScriptを追加: 画像サイズテスト用 -->
+    <script>
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // スクロール時のヘッダーの変化
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+        
+        // ブラウザサイズ変更時のログ出力（デバッグ用）
+        function logViewportSize() {
+            console.log('Viewport size: ' + window.innerWidth + ' x ' + window.innerHeight);
+        }
+        
+        window.addEventListener('resize', logViewportSize);
+        window.addEventListener('load', logViewportSize);
+
+        
+    </script>
 </body>
 </html>
