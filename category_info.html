@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カテゴリ別商品評価基準・配送条件一覧</title>
+    <style>
+        :root {
+            --main-color: #ff7842;
+            --sub-color-1: #ffa042;
+            --sub-color-2: #fdfc0e;
+            --sub-color-3: #441100;
+            --accent-color: #00a268;
+            --bg-light: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #fff;
+            --good-color: #4CAF50;
+            --average-color: #FFC107;
+            --poor-color: #F44336;
+            --unavailable-color: #E0E0E0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background-color: transparent;
+            color: var(--text-dark);
+            padding: 25px 30px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .title-icon {
+            width: 6px;
+            height: 28px;
+            background-color: var(--main-color);
+            margin-right: 15px;
+            border-radius: 3px;
+        }
+        
+        h1 {
+            font-size: 22px;
+            font-weight: normal;
+            margin-bottom: 5px;
+            color: #222;
+        }
+        
+        .description {
+            font-size: 14px;
+            max-width: 800px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .table-container {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            color: var(--text-dark);
+            font-weight: 600;
+            text-align: center;
+            padding: 6px 8px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        td {
+            padding: 5px 8px; 
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .category-name {
+            text-align: left;
+            font-weight: normal;
+            min-width: 180px;
+        }
+        
+        .good {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--good-color);
+            font-weight: normal;
+        }
+        
+        .average {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #e6a700;
+            font-weight: normal;
+        }
+        
+        .poor {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--poor-color);
+            font-weight: normal;
+        }
+        
+        .unavailable {
+            background-color: rgba(224, 224, 224, 0.3);
+            color: #888;
+            font-style: italic;
+        }
+        
+        .legend {
+            margin: 20px 20px 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            border-left: 4px solid var(--main-color);
+        }
+        
+        .legend h3 {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            border-radius: 3px;
+        }
+        
+        .good-color {
+            background-color: rgba(76, 175, 80, 0.1);
+            border: 1px solid var(--good-color);
+        }
+        
+        .average-color {
+            background-color: rgba(255, 193, 7, 0.1);
+            border: 1px solid var(--average-color);
+        }
+        
+        .poor-color {
+            background-color: rgba(244, 67, 54, 0.1);
+            border: 1px solid var(--poor-color);
+        }
+        
+        .unavailable-color {
+            background-color: rgba(224, 224, 224, 0.3);
+            border: 1px solid #bbb;
+        }
+        
+        .notes {
+            margin: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            th, td {
+                padding: 8px 5px;
+                font-size: 12px;
+            }
+            
+            .category-name {
+                min-width: 120px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            .title-icon {
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 商品評価基準の表 -->
+    <div class="container">
+        <header>
+            <div class="title-icon"></div>
+            <div>
+                <h1>カテゴリ別商品評価目安</h1>
+                <p class="description">需要スコアの算出に利用する、各商品カテゴリにおけるランキング評価基準と月間販売数基準の目安です。</p>
+            </div>
+        </header>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th rowspan="2">カテゴリ名</th>
+                        <th colspan="3">ランキング評価（位）</th>
+                        <th colspan="3">月間販売数（個）</th>
+                    </tr>
+                    <tr>
+                        <th>良好</th>
+                        <th>中程度</th>
+                        <th>低い</th>
+                        <th>良好</th>
+                        <th>中程度</th>
+                        <th>低い</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="category-name">Alexaスキル</td>
+                        <td class="good">～100</td>
+                        <td class="average">101〜500</td>
+                        <td class="poor">501〜</td>
+                        <td class="good">100~</td>
+                        <td class="average">30~99</td>
+                        <td class="poor">~29</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">Amazonデバイス・アクセサリ</td>
+                        <td class="good">～1,000</td>
+                        <td class="average">1,001〜3,000</td>
+                        <td class="poor">3,001〜</td>
+                        <td class="good">300~</td>
+                        <td class="average">100~299</td>
+                        <td class="poor">~99</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">Audible オーディオブック</td>
+                        <td class="good">～200</td>
+                        <td class="average">201〜800</td>
+                        <td class="poor">801〜</td>
+                        <td class="good">100〜</td>
+                        <td class="average">30〜99</td>
+                        <td class="poor">〜29</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">DIY・工具・ガーデン</td>
+                        <td class="good">～10,000</td>
+                        <td class="average">10,001〜30,000</td>
+                        <td class="poor">30,001〜</td>
+                        <td class="good">100〜</td>
+                        <td class="average">30〜99</td>
+                        <td class="poor">〜29</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">DVD</td>
+                        <td class="good">～2,000</td>
+                        <td class="average">2,001〜10,000</td>
+                        <td class="poor">10,001〜</td>
+                        <td class="good">100〜</td>
+                        <td class="average">30〜99</td>
+                        <td class="poor">〜29</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">Kindleストア</td>
+                        <td class="good">～500</td>
+                        <td class="average">501〜2,000</td>
+                        <td class="poor">2,001〜</td>
+                        <td class="good">300〜</td>
+                        <td class="average">100〜299</td>
+                        <td class="poor">〜99</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">PCソフト</td>
+                        <td class="good">～1,000</td>
+                        <td class="average">1,001〜3,000</td>
+                        <td class="poor">3,001〜</td>
+                        <td class="good">100〜</td>
+                        <td class="average">30〜99</td>
+                        <td class="poor">〜29</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">Prime Video</td>
+                        <td class="good">～500</td>
+                        <td class="average">501〜1,500</td>
+                        <td class="poor">1,501〜</td>
+                        <td class="good">100〜</td>
+                        <td class="average">30〜99</td>
+                        <td class="poor">〜29</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">アプリ＆ゲーム</td>
+                        <td class="good">～1,000</td>
+                        <td class="average">1,001〜5,000</td>
+                        <td class="poor">5,001〜</td>
+                        <td class="good">200~</td>
+                        <td class="average">50~199</td>
+                        <td class="poor">~49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">おもちゃ</td>
+                        <td class="good">～5,000</td>
+                        <td class="average">5,001〜20,000</td>
+                        <td class="poor">20,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ゲーム</td>
+                        <td class="good">～1,000</td>
+                        <td class="average">1,001〜5,000</td>
+                        <td class="poor">5,001〜</td>
+                        <td class="good">300〜</td>
+                        <td class="average">100〜299</td>
+                        <td class="poor">〜99</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">スポーツ＆アウトドア</td>
+                        <td class="good">～10,000</td>
+                        <td class="average">10,001〜30,000</td>
+                        <td class="poor">30,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">デジタルミュージック</td>
+                        <td class="good">～200</td>
+                        <td class="average">201〜800</td>
+                        <td class="poor">801〜</td>
+                        <td class="good">100〜</td>
+                        <td class="average">30〜99</td>
+                        <td class="poor">〜29</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ドラッグストア</td>
+                        <td class="good">～5,000</td>
+                        <td class="average">5,001〜20,000</td>
+                        <td class="poor">20,001〜</td>
+                        <td class="good">300〜</td>
+                        <td class="average">100〜299</td>
+                        <td class="poor">〜99</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">パソコン・周辺機器</td>
+                        <td class="good">～3,000</td>
+                        <td class="average">3,001〜10,000</td>
+                        <td class="poor">10,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ビューティー</td>
+                        <td class="good">～5,000</td>
+                        <td class="average">5,001〜20,000</td>
+                        <td class="poor">20,001〜</td>
+                        <td class="good">300〜</td>
+                        <td class="average">100〜299</td>
+                        <td class="poor">〜99</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ファイナンス</td>
+                        <td class="good">～200</td>
+                        <td class="average">201〜600</td>
+                        <td class="poor">601〜</td>
+                        <td class="good">100〜</td>
+                        <td class="average">30〜99</td>
+                        <td class="poor">〜29</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ファッション</td>
+                        <td class="good">～3,000</td>
+                        <td class="average">3,001〜10,000</td>
+                        <td class="poor">10,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ペット用品</td>
+                        <td class="good">～3,000</td>
+                        <td class="average">3,001〜10,000</td>
+                        <td class="poor">10,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ベビー＆マタニティ</td>
+                        <td class="good">～2,000</td>
+                        <td class="average">2,001〜7,000</td>
+                        <td class="poor">7,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ホーム＆キッチン</td>
+                        <td class="good">～20,000</td>
+                        <td class="average">20,001〜60,000</td>
+                        <td class="poor">60,001〜</td>
+                        <td class="good">300〜</td>
+                        <td class="average">100〜299</td>
+                        <td class="poor">〜99</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ホビー</td>
+                        <td class="good">～5,000</td>
+                        <td class="average">5,001〜15,000</td>
+                        <td class="poor">15,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ミュージック</td>
+                        <td class="good">～2,000</td>
+                        <td class="average">2,001〜8,000</td>
+                        <td class="poor">8,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">家電＆カメラ</td>
+                        <td class="good">～5,000</td>
+                        <td class="average">5,001〜15,000</td>
+                        <td class="poor">15,001〜</td>
+                        <td class="good">300〜</td>
+                        <td class="average">100〜299</td>
+                        <td class="poor">〜99</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">楽器・音響機器</td>
+                        <td class="good">～3,000</td>
+                        <td class="average">3,001〜10,000</td>
+                        <td class="poor">10,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">産業・研究開発用品</td>
+                        <td class="good">～5,000</td>
+                        <td class="average">5,001〜15,000</td>
+                        <td class="poor">15,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">車＆バイク</td>
+                        <td class="good">～3,000</td>
+                        <td class="average">3,001〜10,000</td>
+                        <td class="poor">10,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">食品・飲料・お酒</td>
+                        <td class="good">～3,000</td>
+                        <td class="average">3,001〜10,000</td>
+                        <td class="poor">10,001〜</td>
+                        <td class="good">300〜</td>
+                        <td class="average">100〜299</td>
+                        <td class="poor">〜99</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">大型家電</td>
+                        <td class="good">～1,000</td>
+                        <td class="average">1,001〜3,000</td>
+                        <td class="poor">3,001〜</td>
+                        <td class="good">100〜</td>
+                        <td class="average">30〜99</td>
+                        <td class="poor">〜29</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">文房具・オフィス用品</td>
+                        <td class="good">～5,000</td>
+                        <td class="average">5,001〜15,000</td>
+                        <td class="poor">15,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">本</td>
+                        <td class="good">～3,000</td>
+                        <td class="average">3,001〜10,000</td>
+                        <td class="poor">10,001〜</td>
+                        <td class="good">300〜</td>
+                        <td class="average">100〜299</td>
+                        <td class="poor">〜99</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">洋書</td>
+                        <td class="good">～5,000</td>
+                        <td class="average">5,001〜15,000</td>
+                        <td class="poor">15,001〜</td>
+                        <td class="good">200〜</td>
+                        <td class="average">50〜199</td>
+                        <td class="poor">〜49</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+                
+        <div class="notes">
+            <p>※ この情報はツールでスコアを算出するための目安となっており、正確なものではありません</p>
+        </div>
+    </div>
+
+    <!-- FBM発送手数料計算ルール見出し -->
+    <div class="container" style="margin-top: 40px; margin-bottom: 20px;">
+        <header>
+            <div class="title-icon"></div>
+            <div>
+                <h1>FBMの場合の発送手数料計算ルール</h1>
+                <p class="description">FBMでの出品時の発送手数料計算方法です。KeepaCSVで商品の梱包サイズ情報が利用可能かどうかで計算方法が異なります。</p>
+            </div>
+        </header>
+        
+        <div style="padding: 0 20px 20px;">
+            <div style="background-color: #f9f9f9; padding: 15px; border-radius: 6px; margin-top: 10px; margin-bottom: 20px;">
+                <p style="margin-bottom: 10px;"><span style="color: var(--main-color); font-weight: bold;">①</span> <b>梱包サイズ情報がある場合</b>の計算式：</p>
+                <p style="margin-left: 20px; font-family: monospace; background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">送料 + 梱包料金 = 発送手数料</p>
+                <p style="margin-top: 15px;"><span style="color: var(--main-color); font-weight: bold;">②</span> <b>梱包サイズ情報がない場合</b>：<b>カテゴリ別発送手数料一覧を参照</b></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 送料計算基準表 -->
+    <div class="container">
+        <header>
+            <div class="title-icon"></div>
+            <div>
+                <h1>送料・梱包料金計算基準（梱包サイズ情報がある場合）</h1>
+                <p class="description">商品サイズと重量に基づく送料と梱包料金の計算基準の目安です。</p>
+            </div>
+        </header>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>配送方法</th>
+                        <th>サイズ条件</th>
+                        <th>重量条件</th>
+                        <th>送料（円）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="category-name">クリックポスト / ゆうパケット</td>
+                        <td>長さ34cm以下 × 幅25cm以下 × 高さ3cm以下</td>
+                        <td>1kg以下</td>
+                        <td>250</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">宅急便コンパクト</td>
+                        <td>三辺合計60cm以下</td>
+                        <td>2kg以下</td>
+                        <td>550</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">宅急便60〜80サイズ</td>
+                        <td>三辺合計80cm以下</td>
+                        <td>制限なし</td>
+                        <td>850</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">宅急便100サイズ</td>
+                        <td>三辺合計100cm以下</td>
+                        <td>5kg以下</td>
+                        <td>1100</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">宅急便120サイズ以上（大型）</td>
+                        <td>三辺合計100cm超</td>
+                        <td>5kg超</td>
+                        <td>1400</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="table-container" style="margin-top: 20px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>梱包材タイプ</th>
+                        <th>サイズ条件</th>
+                        <th>重量条件</th>
+                        <th>梱包料金（円）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="category-name">封筒 or 小型段ボール</td>
+                        <td>三辺合計60cm以下</td>
+                        <td>1kg以下</td>
+                        <td>70</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">小型段ボール（60サイズ）</td>
+                        <td>三辺合計80cm以下</td>
+                        <td>2kg以下</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">段ボール（80サイズ）</td>
+                        <td>三辺合計100cm以下</td>
+                        <td>5kg以下</td>
+                        <td>140</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">中〜大型段ボール</td>
+                        <td>三辺合計100cm超</td>
+                        <td>5kg超</td>
+                        <td>200</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="notes">
+            <p>※ 複数商品の場合、梱包料金は数量により調整されます：</p>
+            <p>　・2〜3点：基本料金の1.2倍</p>
+            <p>　・4点以上：基本料金の1.5倍</p>
+            <p>※ 三辺合計 = 長さ + 幅 + 高さ（cm）</p>
+            <p>※ 重量はグラム単位（1kg = 1000g）</p>
+        </div>
+    </div>
+    
+    <!-- 配送条件一覧の表 -->
+    <div class="container">
+        <header>
+            <div class="title-icon"></div>
+            <div>
+                <h1>カテゴリ別発送手数料一覧（梱包サイズ情報がない場合）</h1>
+                <p class="description">各商品カテゴリにおける仕入率と送料・梱包資材費の目安です。</p>
+            </div>
+        </header>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>カテゴリ名</th>
+                        <th>仕入率</th>
+                        <th>平均送料＋梱包資材費（円）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="category-name">Alexaスキル</td>
+                        <td class="unavailable">販売不可</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">Amazonデバイス・アクセサリ</td>
+                        <td>85%</td>
+                        <td>450</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">Audible オーディオブック</td>
+                        <td class="unavailable">販売不可</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">DIY・工具・ガーデン</td>
+                        <td>55%</td>
+                        <td>700</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">DVD</td>
+                        <td>50%</td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">Kindleストア</td>
+                        <td class="unavailable">販売不可</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">PCソフト</td>
+                        <td>65%</td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">Prime Video</td>
+                        <td class="unavailable">販売不可</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">アプリ＆ゲーム</td>
+                        <td class="unavailable">販売不可</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">おもちゃ</td>
+                        <td>45%</td>
+                        <td>550</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ゲーム</td>
+                        <td>60%</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">スポーツ＆アウトドア</td>
+                        <td>50%</td>
+                        <td>750</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">デジタルミュージック</td>
+                        <td>0%</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ドラッグストア</td>
+                        <td>55%</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">パソコン・周辺機器</td>
+                        <td>70%</td>
+                        <td>600</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ビューティー</td>
+                        <td>50%</td>
+                        <td>450</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ファイナンス</td>
+                        <td class="unavailable">販売不可</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ファッション</td>
+                        <td>50%</td>
+                        <td>450</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ペット用品</td>
+                        <td>55%</td>
+                        <td>600</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ベビー＆マタニティ</td>
+                        <td>55%</td>
+                        <td>600</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ホーム＆キッチン</td>
+                        <td>50%</td>
+                        <td>650</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ホビー</td>
+                        <td>45%</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">ミュージック</td>
+                        <td>45%</td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">家電＆カメラ</td>
+                        <td>75%</td>
+                        <td>700</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">楽器・音響機器</td>
+                        <td>60%</td>
+                        <td>750</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">産業・研究開発用品</td>
+                        <td>65%</td>
+                        <td>900</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">車＆バイク</td>
+                        <td>60%</td>
+                        <td>700</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">食品・飲料・お酒</td>
+                        <td>60%</td>
+                        <td>650</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">大型家電</td>
+                        <td>80%</td>
+                        <td>1500</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">文房具・オフィス用品</td>
+                        <td>50%</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">本</td>
+                        <td>30%</td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">洋書</td>
+                        <td>40%</td>
+                        <td>400</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="notes">
+            <p>※ 仕入率は商品原価の目安を表します</p>
+            <p>※ 「販売不可」と表示されているカテゴリは、デジタルコンテンツなど特定の販売条件があります</p>
+            <p>※ この情報はツールでスコアを算出するための目安となっており、正確なものではありません</p>
+        </div>
+    </div>
+</body>
+</html>
