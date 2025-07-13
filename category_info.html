@@ -89,7 +89,7 @@
         th {
             background-color: #f2f2f2;
             color: var(--text-dark);
-            font-weight: 600;
+            font-weight: normal;
             text-align: center;
             padding: 6px 8px;
             position: sticky;
@@ -218,12 +218,453 @@
     </style>
 </head>
 <body>
+    
+    
+    <!-- 仕入率の表を別のコンテナに移動 -->
+    <!-- 仕入率の表を別のコンテナに移動 -->
+    <div class="container">
+        <header>
+            <div class="title-icon"></div>
+            <div>
+                <h1>カテゴリ別仕入率の目安</h1>
+                <p class="description">利益率スコアの算出に利用する、各商品カテゴリにおける仕入率（商品原価の割合）の目安です。</p>
+            </div>
+        </header>
+        
+        <div class="table-container">
+            <!-- テーブルの幅を制限 -->
+            <table style="max-width: 600px; margin-left: 0;">
+                <thead>
+                    <tr>
+                        <th style="width: 70%;">カテゴリ名</th>
+                        <th style="width: 30%;">仕入率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">Alexaスキル</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">Amazonデバイス・アクセサリ</td>
+                        <td>85%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">Audible オーディオブック</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">DIY・工具・ガーデン</td>
+                        <td>55%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">DVD</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">Kindleストア</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">PCソフト</td>
+                        <td>65%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">Prime Video</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">アプリ＆ゲーム</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">おもちゃ</td>
+                        <td>45%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ゲーム</td>
+                        <td>60%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">スポーツ＆アウトドア</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">デジタルミュージック</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ドラッグストア</td>
+                        <td>55%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">パソコン・周辺機器</td>
+                        <td>70%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ビューティー</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ファイナンス</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ファッション</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ペット用品</td>
+                        <td>55%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ベビー＆マタニティ</td>
+                        <td>55%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ホーム＆キッチン</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ホビー</td>
+                        <td>45%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ミュージック</td>
+                        <td>45%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">家電＆カメラ</td>
+                        <td>75%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">楽器・音響機器</td>
+                        <td>60%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">産業・研究開発用品</td>
+                        <td>65%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">車＆バイク</td>
+                        <td>60%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">食品・飲料・お酒</td>
+                        <td>60%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">大型家電</td>
+                        <td>80%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">文房具・オフィス用品</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">本</td>
+                        <td>30%</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">洋書</td>
+                        <td>40%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="notes">
+            <p>※ 仕入率は商品原価の目安を表します</p>
+            <p>※ 「販売不可」と表示されているカテゴリは、デジタルコンテンツなど特定の販売条件があります</p>
+            <p>※ この情報はツールでスコアを算出するための目安となっており、正確なものではありません</p>
+        </div>
+    </div>
+
+    <!-- FBM発送手数料計算ルール見出し -->
+    <div class="container" style="margin-top: 40px; margin-bottom: 20px;">
+        <header>
+            <div class="title-icon"></div>
+            <div>
+                <h1>FBMの場合の発送手数料計算ルール</h1>
+                <p class="description">FBMでの出品時の発送手数料計算方法です。KeepaCSVで商品の梱包サイズ情報が利用可能かどうかで計算方法が異なります。</p>
+            </div>
+        </header>
+        
+        <div style="padding: 0 20px 20px;">
+            <div style="background-color: #f9f9f9; padding: 15px; border-radius: 6px; margin-top: 10px; margin-bottom: 20px;">
+                <p style="margin-bottom: 10px;"><span style="color: var(--main-color); font-weight: bold;">①</span> <b>梱包サイズ情報がある場合</b>の計算式：</p>
+                <p style="margin-left: 20px; font-family: monospace; background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">送料 + 梱包料金 = 発送手数料</p>
+                <p style="margin-top: 15px;"><span style="color: var(--main-color); font-weight: bold;">②</span> <b>梱包サイズ情報がない場合</b>：<b>カテゴリ別発送手数料一覧を参照</b></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 送料計算基準表 -->
+    <div class="container">
+        <header>
+            <div class="title-icon"></div>
+            <div>
+                <h1>送料・梱包料金計算基準（梱包サイズ情報がある場合）</h1>
+                <p class="description">商品サイズと重量に基づく送料と梱包料金の計算基準の目安です。</p>
+            </div>
+        </header>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>配送方法</th>
+                        <th>サイズ条件</th>
+                        <th>重量条件</th>
+                        <th>送料（円）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="category-name">クリックポスト / ゆうパケット</td>
+                        <td>長さ34cm以下 × 幅25cm以下 × 高さ3cm以下</td>
+                        <td>1kg以下</td>
+                        <td>250</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">宅急便コンパクト</td>
+                        <td>三辺合計60cm以下</td>
+                        <td>2kg以下</td>
+                        <td>550</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">宅急便60〜80サイズ</td>
+                        <td>三辺合計80cm以下</td>
+                        <td>制限なし</td>
+                        <td>850</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">宅急便100サイズ</td>
+                        <td>三辺合計100cm以下</td>
+                        <td>5kg以下</td>
+                        <td>1100</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">宅急便120サイズ以上（大型）</td>
+                        <td>三辺合計100cm超</td>
+                        <td>5kg超</td>
+                        <td>1400</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="table-container" style="margin-top: 20px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>梱包材タイプ</th>
+                        <th>サイズ条件</th>
+                        <th>重量条件</th>
+                        <th>梱包料金（円）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="category-name">封筒 or 小型段ボール</td>
+                        <td>三辺合計60cm以下</td>
+                        <td>1kg以下</td>
+                        <td>70</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">小型段ボール（60サイズ）</td>
+                        <td>三辺合計80cm以下</td>
+                        <td>2kg以下</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">段ボール（80サイズ）</td>
+                        <td>三辺合計100cm以下</td>
+                        <td>5kg以下</td>
+                        <td>140</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name">中〜大型段ボール</td>
+                        <td>三辺合計100cm超</td>
+                        <td>5kg超</td>
+                        <td>200</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="notes">
+            <p>※ 複数商品の場合、梱包料金は数量により調整されます：</p>
+            <p>　・2〜3点：基本料金の1.2倍</p>
+            <p>　・4点以上：基本料金の1.5倍</p>
+            <p>※ 三辺合計 = 長さ + 幅 + 高さ（cm）</p>
+            <p>※ 重量はグラム単位（1kg = 1000g）</p>
+        </div>
+    </div>
+    <!-- 配送条件一覧の表 -->
+    <div class="container">
+        <header>
+            <div class="title-icon"></div>
+            <div>
+                <h1>カテゴリ別発送手数料一覧（梱包サイズ情報がない場合）</h1>
+                <p class="description">各商品カテゴリにおける送料・梱包資材費の目安です。</p>
+            </div>
+        </header>
+        
+        <div class="table-container">
+            <!-- テーブルの幅を制限し、左揃えに設定 -->
+            <table style="max-width: 600px; margin-left: 0;">
+                <thead>
+                    <tr>
+                        <th style="width: 70%;">カテゴリ名</th>
+                        <th style="width: 30%;">平均送料＋梱包資材費（円）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">Alexaスキル</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">Amazonデバイス・アクセサリ</td>
+                        <td>450</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">Audible オーディオブック</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">DIY・工具・ガーデン</td>
+                        <td>700</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">DVD</td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">Kindleストア</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">PCソフト</td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">Prime Video</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">アプリ＆ゲーム</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">おもちゃ</td>
+                        <td>550</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ゲーム</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">スポーツ＆アウトドア</td>
+                        <td>750</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">デジタルミュージック</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ドラッグストア</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">パソコン・周辺機器</td>
+                        <td>600</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ビューティー</td>
+                        <td>450</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ファイナンス</td>
+                        <td class="unavailable">販売不可</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ファッション</td>
+                        <td>450</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ペット用品</td>
+                        <td>600</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ベビー＆マタニティ</td>
+                        <td>600</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ホーム＆キッチン</td>
+                        <td>650</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ホビー</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">ミュージック</td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">家電＆カメラ</td>
+                        <td>700</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">楽器・音響機器</td>
+                        <td>750</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">産業・研究開発用品</td>
+                        <td>900</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">車＆バイク</td>
+                        <td>700</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">食品・飲料・お酒</td>
+                        <td>650</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">大型家電</td>
+                        <td>1500</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">文房具・オフィス用品</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">本</td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td class="category-name" style="max-width: 300px; padding-right: 15px;">洋書</td>
+                        <td>400</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="notes">
+            <p>※ 「販売不可」と表示されているカテゴリは、デジタルコンテンツなど特定の販売条件があります</p>
+            <p>※ この情報はツールでスコアを算出するための目安となっており、正確なものではありません</p>
+        </div>
+    </div>
+        
     <!-- 商品評価基準の表 -->
     <div class="container">
         <header>
             <div class="title-icon"></div>
             <div>
-                <h1>カテゴリ別商品評価目安</h1>
+                <h1 id="category-evaluation-criteria">カテゴリ別商品評価目安</h1>
                 <p class="description">需要スコアの算出に利用する、各商品カテゴリにおけるランキング評価基準と月間販売数基準の目安です。</p>
             </div>
         </header>
@@ -538,321 +979,7 @@
             </table>
         </div>
         
-                
         <div class="notes">
-            <p>※ この情報はツールでスコアを算出するための目安となっており、正確なものではありません</p>
-        </div>
-    </div>
-
-    <!-- FBM発送手数料計算ルール見出し -->
-    <div class="container" style="margin-top: 40px; margin-bottom: 20px;">
-        <header>
-            <div class="title-icon"></div>
-            <div>
-                <h1>FBMの場合の発送手数料計算ルール</h1>
-                <p class="description">FBMでの出品時の発送手数料計算方法です。KeepaCSVで商品の梱包サイズ情報が利用可能かどうかで計算方法が異なります。</p>
-            </div>
-        </header>
-        
-        <div style="padding: 0 20px 20px;">
-            <div style="background-color: #f9f9f9; padding: 15px; border-radius: 6px; margin-top: 10px; margin-bottom: 20px;">
-                <p style="margin-bottom: 10px;"><span style="color: var(--main-color); font-weight: bold;">①</span> <b>梱包サイズ情報がある場合</b>の計算式：</p>
-                <p style="margin-left: 20px; font-family: monospace; background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">送料 + 梱包料金 = 発送手数料</p>
-                <p style="margin-top: 15px;"><span style="color: var(--main-color); font-weight: bold;">②</span> <b>梱包サイズ情報がない場合</b>：<b>カテゴリ別発送手数料一覧を参照</b></p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 送料計算基準表 -->
-    <div class="container">
-        <header>
-            <div class="title-icon"></div>
-            <div>
-                <h1>送料・梱包料金計算基準（梱包サイズ情報がある場合）</h1>
-                <p class="description">商品サイズと重量に基づく送料と梱包料金の計算基準の目安です。</p>
-            </div>
-        </header>
-        
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>配送方法</th>
-                        <th>サイズ条件</th>
-                        <th>重量条件</th>
-                        <th>送料（円）</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="category-name">クリックポスト / ゆうパケット</td>
-                        <td>長さ34cm以下 × 幅25cm以下 × 高さ3cm以下</td>
-                        <td>1kg以下</td>
-                        <td>250</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">宅急便コンパクト</td>
-                        <td>三辺合計60cm以下</td>
-                        <td>2kg以下</td>
-                        <td>550</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">宅急便60〜80サイズ</td>
-                        <td>三辺合計80cm以下</td>
-                        <td>制限なし</td>
-                        <td>850</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">宅急便100サイズ</td>
-                        <td>三辺合計100cm以下</td>
-                        <td>5kg以下</td>
-                        <td>1100</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">宅急便120サイズ以上（大型）</td>
-                        <td>三辺合計100cm超</td>
-                        <td>5kg超</td>
-                        <td>1400</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="table-container" style="margin-top: 20px;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>梱包材タイプ</th>
-                        <th>サイズ条件</th>
-                        <th>重量条件</th>
-                        <th>梱包料金（円）</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="category-name">封筒 or 小型段ボール</td>
-                        <td>三辺合計60cm以下</td>
-                        <td>1kg以下</td>
-                        <td>70</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">小型段ボール（60サイズ）</td>
-                        <td>三辺合計80cm以下</td>
-                        <td>2kg以下</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">段ボール（80サイズ）</td>
-                        <td>三辺合計100cm以下</td>
-                        <td>5kg以下</td>
-                        <td>140</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">中〜大型段ボール</td>
-                        <td>三辺合計100cm超</td>
-                        <td>5kg超</td>
-                        <td>200</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="notes">
-            <p>※ 複数商品の場合、梱包料金は数量により調整されます：</p>
-            <p>　・2〜3点：基本料金の1.2倍</p>
-            <p>　・4点以上：基本料金の1.5倍</p>
-            <p>※ 三辺合計 = 長さ + 幅 + 高さ（cm）</p>
-            <p>※ 重量はグラム単位（1kg = 1000g）</p>
-        </div>
-    </div>
-    
-    <!-- 配送条件一覧の表 -->
-    <div class="container">
-        <header>
-            <div class="title-icon"></div>
-            <div>
-                <h1>カテゴリ別発送手数料一覧（梱包サイズ情報がない場合）</h1>
-                <p class="description">各商品カテゴリにおける仕入率と送料・梱包資材費の目安です。</p>
-            </div>
-        </header>
-        
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>カテゴリ名</th>
-                        <th>仕入率</th>
-                        <th>平均送料＋梱包資材費（円）</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="category-name">Alexaスキル</td>
-                        <td class="unavailable">販売不可</td>
-                        <td class="unavailable">販売不可</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">Amazonデバイス・アクセサリ</td>
-                        <td>85%</td>
-                        <td>450</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">Audible オーディオブック</td>
-                        <td class="unavailable">販売不可</td>
-                        <td class="unavailable">販売不可</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">DIY・工具・ガーデン</td>
-                        <td>55%</td>
-                        <td>700</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">DVD</td>
-                        <td>50%</td>
-                        <td>350</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">Kindleストア</td>
-                        <td class="unavailable">販売不可</td>
-                        <td class="unavailable">販売不可</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">PCソフト</td>
-                        <td>65%</td>
-                        <td>350</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">Prime Video</td>
-                        <td class="unavailable">販売不可</td>
-                        <td class="unavailable">販売不可</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">アプリ＆ゲーム</td>
-                        <td class="unavailable">販売不可</td>
-                        <td class="unavailable">販売不可</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">おもちゃ</td>
-                        <td>45%</td>
-                        <td>550</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">ゲーム</td>
-                        <td>60%</td>
-                        <td>400</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">スポーツ＆アウトドア</td>
-                        <td>50%</td>
-                        <td>750</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">デジタルミュージック</td>
-                        <td>0%</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">ドラッグストア</td>
-                        <td>55%</td>
-                        <td>500</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">パソコン・周辺機器</td>
-                        <td>70%</td>
-                        <td>600</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">ビューティー</td>
-                        <td>50%</td>
-                        <td>450</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">ファイナンス</td>
-                        <td class="unavailable">販売不可</td>
-                        <td class="unavailable">販売不可</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">ファッション</td>
-                        <td>50%</td>
-                        <td>450</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">ペット用品</td>
-                        <td>55%</td>
-                        <td>600</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">ベビー＆マタニティ</td>
-                        <td>55%</td>
-                        <td>600</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">ホーム＆キッチン</td>
-                        <td>50%</td>
-                        <td>650</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">ホビー</td>
-                        <td>45%</td>
-                        <td>500</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">ミュージック</td>
-                        <td>45%</td>
-                        <td>350</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">家電＆カメラ</td>
-                        <td>75%</td>
-                        <td>700</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">楽器・音響機器</td>
-                        <td>60%</td>
-                        <td>750</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">産業・研究開発用品</td>
-                        <td>65%</td>
-                        <td>900</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">車＆バイク</td>
-                        <td>60%</td>
-                        <td>700</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">食品・飲料・お酒</td>
-                        <td>60%</td>
-                        <td>650</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">大型家電</td>
-                        <td>80%</td>
-                        <td>1500</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">文房具・オフィス用品</td>
-                        <td>50%</td>
-                        <td>400</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">本</td>
-                        <td>30%</td>
-                        <td>350</td>
-                    </tr>
-                    <tr>
-                        <td class="category-name">洋書</td>
-                        <td>40%</td>
-                        <td>400</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="notes">
-            <p>※ 仕入率は商品原価の目安を表します</p>
-            <p>※ 「販売不可」と表示されているカテゴリは、デジタルコンテンツなど特定の販売条件があります</p>
             <p>※ この情報はツールでスコアを算出するための目安となっており、正確なものではありません</p>
         </div>
     </div>
